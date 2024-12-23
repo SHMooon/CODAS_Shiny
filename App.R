@@ -1166,12 +1166,12 @@ ui <- fluidPage(
                              tags$a(href = "https://codas.vn/?lang=en",
                                     tags$img(src = "Logo/CODAS.png", height = "70px"))
              ),
-             column(width = 7,  # Center alignment logic with empty space between logos
+             column(width = 8,  # Center alignment logic with empty space between logos
                     align = "center",
                     ""
              ),      
-             column( width = 3,
-                     align = "right",
+             column( width = 2,
+                     align = "center",
                      tags$a(tags$img(src = "Logo/BMEL.png", height = "90px"))
              ))
              
