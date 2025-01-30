@@ -707,7 +707,7 @@ ui <- fluidPage(
                                  
                     ),
                     #8. Estimation of potential external investment####
-                    tags$div(id = "8", h4(strong('8.Ước tính tiềm năng thu hút đầu tư'))),
+                    tags$div(id = "8", h4(strong('8. Ước tính tiềm năng thu hút đầu tư'))),
                     
                     p("Vận hành chương trình vườn trường có thể làm tăng danh tiếng của trường và do đó, điều này có thể dẫn đến nguồn đầu tư 
                       bổ sung từ bên ngoài trường học (ví dụ: các nhà tài trợ từ các doanh nghiệp địa phương). Tuy nhiên, điều này không chắc chắn."),
