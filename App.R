@@ -144,49 +144,53 @@ ui <- fluidPage(
              column(7, class = "content",
                     br(),
                     
-           
-                    
-                   
-                    
                     tags$div(id = "0_1", h4(strong('Giới thiệu về mô hình vườn trường'))),
-                    p("Mô hình ra quyết định cho can thiệp dinh dưỡng bằng vườn trường tại khu vực đô thị Hà Nội. Có ba phương án đầu tư:
-                                        "),
-                    p("1.	Xây dựng vườn trường trên khuôn viên sẵn có của trường:
-                    Vườn được xây dựng thêm một cách không chính thức, sử dụng thụ động cho mục đích giáo dục "),
-                    p("2.	Vườn trường trở thành một phần chính thức của chương trình giáo dục STEM:
+                    p("Mô hình hỗ trợ ra quyết định cho can thiệp dinh dưỡng bằng vườn trường tại khu vực đô thị Hà Nội được xây dựng nhằm mục đích giúp Ban Giám Hiệu 
+                    của các trường học ở đưa ra quyết định có nên vận hành vườn trường trong khuôn viên trường học hay không và có tích hợp vườn trường này vào phương 
+                    pháp giảng dạy STEM hay không. Theo đó, có 3 phương án đầu tư được đưa ra bao gồm: "),
+                  
+                    p(HTML("<b>1. Vuờn:</b> Xây dựng vườn trường trên khuôn viên sẵn có của trường. 
+                    Vườn được xây dựng thêm một cách không chính thức, sử dụng thụ động cho mục đích giáo dục ")),
+                    p(HTML("<b>2.	Vườn-STEM:</b> Vườn trường trở thành một phần chính thức của chương trình giáo dục STEM:
                     Được sử dụng cho mục đích giáo dục, kèm theo các chi phí đào tạo và chi phí khác, nhưng bù đắp bằng việc giảm chi phí giáo dục và hoạt động ngoại khóa.
-                    "),
-                    p("3.	Duy trì việc sử dụng đất như hiện tại, không thay đổi gì:
-                    Diện tích đất được tiếp tục sử dụng cho các mục đích khác như khu vui chơi thay vì làm vườn trường."),
+                    ")),
+                    p(HTML("<b>3.	Baseline:</b> Duy trì việc sử dụng đất như hiện tại, không thay đổi gì:
+                    Diện tích đất được tiếp tục sử dụng cho các mục đích khác như khu vui chơi thay vì làm vườn trường.")),
+                    p ("Mô hình lý thuyết của quyết định này được xây dựng với sự tham gia một nhóm chuyên gia và tổ chức phi chính phủ CODAS. 
+                    Sau đó, một mô hình toán học đã được phát triển bởi nhóm nghiên cứu của Đại học Bonn để mô phỏng kết quả của 10 năm hoạt 
+                    động của vườn trường dựa vào giá trị của các biến đầu vào được cung cấp bởi chuyên gia. Bạn có thể nhìn xem kết quả tác động của vườn trường ở phía bên phải."),
                     br(),
                     
-                    tags$div(id = "0", h4(strong("Cung cấp số liệu đầu vào cho mô hình"))),
-                    
-                    tags$a(href = "#1", "Hướng dẫn cách cung cấp số liệu", style = "display: block; margin-bottom: 5px;"),
-                    tags$a(href = "#2", "1. Các biến Cung cấp số liệu cho từng biến", style = "display: block; margin-bottom: 5px;"),
-                    tags$a(href = "#2.1", "2. Ước tính chung về một khu vườn trường học 1", style = "display: block; margin-bottom: 5px;"),
-                    tags$a(href = "#3", "3. Ước tính chung về một khu vườn trường học 2", style = "display: block; margin-bottom: 5px;"),
-                    tags$a(href = "#4", "4. Chi phí đầu tư xây dựng một khu vườn", style = "display: block; margin-bottom: 5px;"),
-                    tags$a(href = "#5", "5. Chi phí hoạt động của vườn trường", style = "display: block; margin-bottom: 5px;"),
+                    tags$div(h4(strong("Cung cấp số liệu đầu vào cho mô hình"))),
+                    p("Mô hình lý thuyết cho thấy tất cả các biến số liên quan và ảnh hưởng đến quyết định và mỗi biến số cần 
+                      được đánh giá định lượng bằng cách đưa ra các khoảng giá trị hợp lý. 
+                      Vui lòng cung cấp các khoảng giá trị mà anh chị chắc chắn 90% là giá trị chính xác sẽ nằm trong khoảng giá trị này, 
+                      giống như khi bạn đưa ra khoảng giá trị khi tham gia tập huấn hiệu chỉnh trong dự án NIFAM."),
+                    tags$div(id = "0", h4(strong("Mục lục"))),
+                  
+                    tags$a(href = "#1", "1. Các thông số chung của mô hình", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#2", "2. Các thông số về khu vườn", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#3", "3. Các thông số về quản lý vườn", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#4", "4. Chi phí đầu tư xây dựng vườn", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#5", "5. Chi phí duy trì hoạt động vườn trường", style = "display: block; margin-bottom: 5px;"),
                     tags$a(href = "#6", "6. Căng tin", style = "display: block; margin-bottom: 5px;"),
-                    tags$a(href = "#7", "7. Tiết kiệm chi phí tiềm năng từ sự tồn tại của khu vườn trường học", style = "display: block; margin-bottom: 5px;"),
-                    tags$a(href = "#8", "8. Ước tính về tiềm năng đầu tư nước ngoài", style = "display: block; margin-bottom: 5px;"),
-                    tags$a(href = "#9", "9. Giả định: ", style = "display: block; margin-bottom: 5px;"),
-                    tags$a(href = "#10", "10. Đánh giá sức khoẻ tâm thần từ vườn trường", style = "display: block; margin-bottom: 5px;"),
-                    tags$a(href = "#11", "11.Ước tính có và không có phương pháp giảng dạy STEM", style = "display: block; margin-bottom: 5px;"),
-                    tags$a(href = "#12", "12. will update ", style = "display: block; margin-bottom: 5px;"),
-                    tags$a(href = "#13", "13. will update", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#7", "7. Tiết kiệm chi phí khác nhờ có vườn trường", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#8", "8. Ước tính tiềm năng thu hút đầu tư", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#9", "9. Tác động của vườn trường tới sức khỏe, học tập và hoạt động xã hội của trẻ ", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#10", "10. Tác động lên sức khỏe tinh thần", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#11", "11. Kịch bản có và không có phương pháp giảng dạy STEM", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#12", "12. Giá trị môi trường ", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#13", "13. Giá trị các sự kiện gắn với vườn trường", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#14", "14. Thông số liên quan đến sử dụng đất", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#15", "15. Các biến số khác", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#16", "Cải thiện mô hình", style = "display: block; margin-bottom: 5px;"),
                     br(),
                     
-                    #1.Introduction on data input provision####
+                    
+                    #1. Introduction on data input provision####
+                    
+                    tags$div(id = "1", h4(strong('1. Các thông số chung của mô hình'))),
                     useShinyjs(),  # Initialize shinyjs
-                    tags$div(id = "1", h4(strong('Hướng dẫn cách cung cấp số liệu'))),
-                    p("Hãy trả lời những câu hỏi sau đây. Hãy đặt mình vào vị trí thành viên Ban Giám Hiệu của một trường học ở nội thành Hà Nội.
-                      Bạn muốn đưa ra quyết định có nên vận hành vườn trường trong khuôn viên trường học hay không và có tích hợp vườn trường này vào phương pháp giảng dạy STEM hay không.
-                      Mô hình lý thuyết của quyết định này được xây dựng với sự tham gia một nhóm chuyên gia và tổ chức phi chính phủ CODAS. 
-                      Mô hình lý thuyết này cho thấy tất cả các nhân tố (biến số) liên quan và ảnh hưởng đến quyết định và mỗi nhân tố cần được đánh giá định lượng bằng cách đưa ra các khoảng giá trị hợp lý.
-                      Vui lòng cung cấp các khoảng giá trị mà anh chị chắc chắn 90% là giá trị chính xác sẽ nằm trong khoảng giá trị này, giống như khi bạn đưa ra khoảng giá trị khi tham gia tập huấn hiệu chỉnh trong dự án NIFAM.
-                      Một mô hình toán học đã được phát triển để mô phỏng kết quả của 10 năm hoạt động của vườn trường dựa vào giá trị đã hiệu chỉnh của các biến đầu vào được cung cấp bởi chuyên gia."),
                     
                     sidebarPanel(  id = "sidebar",  # Assign an ID to the sidebar
                                    width = 12,
@@ -227,7 +231,7 @@ ui <- fluidPage(
                                                max = 100,
                                                value = c(3, 15),
                                                step = 1),
-                                   tags$a(href = "#0", "Go to Table of Content", 
+                                   tags$a(href = "#0", "Quay lại Mục lục", 
                                           style = "display: inline-block; margin-top: 20px; padding: 5px 10px; 
                                                   background-color: #3283CD; float: right; color: white; 
                                                   border-radius: 5px; text-decoration: none;")
@@ -237,7 +241,7 @@ ui <- fluidPage(
                     
                    
                     #2. General estimation####
-                    tags$div(id = "2", h4(strong('2. Ước tính chung về một khu vườn trường học 1'))),
+                    tags$div(id = "2", h4(strong('2. Các thông số về khu vườn'))),
                     
                     sidebarPanel(width = 12,
                                  style = "height: 60vh; overflow-y: auto;", #height in %
@@ -271,7 +275,7 @@ ui <- fluidPage(
                                              max = 20,
                                              value = c(0.4, 2.6),
                                              step = 0.1),
-                                 tags$a(href = "#0", "Go to Table of Content", 
+                                 tags$a(href = "#0", "Quay lại Mục lục", 
                                         style = "display: inline-block; margin-top: 20px; padding: 5px 10px; background-color: #3283CD; 
                            float: right; color: white; border-radius: 5px; text-decoration: none;")
                                  
@@ -279,7 +283,7 @@ ui <- fluidPage(
                     
                     p(),
                     #3. General estimation of####
-                    tags$div(id = "3", h4(strong('3. Ước tính chung về một khu vườn trường học 2'))),
+                    tags$div(id = "3", h4(strong('3. Các thông số về quản lý vườn'))),
                    
                     sidebarPanel(width = 12,
                                  style = "height: 60vh; overflow-y: auto;", #height in %
@@ -396,13 +400,13 @@ ui <- fluidPage(
                                              max = 100,
                                              value = c(50, 80),
                                              step = 1),
-                                 tags$a(href = "#0", "Go to Table of Content", 
+                                 tags$a(href = "#0", "Quay lại Mục lục", 
                                         style = "display: inline-block; margin-top: 20px; padding: 5px 10px; background-color: #3283CD; 
                            float: right; color: white; border-radius: 5px; text-decoration: none;")
                                  
                     ),
                     #4.  The investment costs####
-                    tags$div(id = "4", h4(strong('4. Chi phí đầu tư xây dựng một khu vườn'))),
+                    tags$div(id = "4", h4(strong('4. Chi phí đầu tư xây dựng vườn'))),
                     
                     sidebarPanel(width = 12,
                                  style = "height: 60vh; overflow-y: auto;", #height in %
@@ -487,7 +491,7 @@ ui <- fluidPage(
                                              max = 50,
                                              value = c(3, 10),
                                              step = 1),
-                                 h5(HTML("<b>4-9. livestock_establishment_costs:</b>")),
+                                 h5(HTML("<b>4-9. Livestock_establishment_costs:</b>")),
                                  p("Please estimate the costs for the desired set of livestock 
                                      that will be farmed in the garden for manure production and use of crop residues  (in million VND).",
                                    style = "padding-left: 20px;"),
@@ -497,8 +501,6 @@ ui <- fluidPage(
                                              max = 100,
                                              value = c(3, 20),
                                              step = 1),
-                                 p(),
-                                 h3(HTML("<b>4? Donation from families</b>")),
                                  p(),
                                  h5(HTML("<b>4-10. Chance that families donate to establishment (%):</b>")),
                                  p("Theo anh/chị, có bao nhiêu % khả năng phụ huynh học sinh hoặc các nhà tài 
@@ -520,13 +522,13 @@ ui <- fluidPage(
                                              max = 100,
                                              value = c(20, 80),
                                              step = 1),
-                                 tags$a(href = "#0", "Go to Table of Content", 
+                                 tags$a(href = "#0", "Quay lại Mục lục", 
                                         style = "display: inline-block; margin-top: 20px; padding: 5px 10px; background-color: #3283CD; 
                            float: right; color: white; border-radius: 5px; text-decoration: none;")
                                  
                     ),
                     #5. The running costs####
-                    tags$div(id = "5", h4(strong('5. Chi phí hoạt động của vườn trường'))),
+                    tags$div(id = "5", h4(strong('5. Chi phí duy trì hoạt động vườn trường'))),
                     
                     sidebarPanel(width = 12,
                                  style = "height: 60vh; overflow-y: auto;", #height in %
@@ -616,7 +618,7 @@ ui <- fluidPage(
                                              max = 500,
                                              value = c(5, 276),
                                              step = 1),
-                                 tags$a(href = "#0", "Go to Table of Content", 
+                                 tags$a(href = "#0", "Quay lại Mục lục", 
                                         style = "display: inline-block; margin-top: 20px; padding: 5px 10px; background-color: #3283CD; 
                            float: right; color: white; border-radius: 5px; text-decoration: none;")
                                  
@@ -657,13 +659,13 @@ ui <- fluidPage(
                                              max = 100,
                                              value = c(10, 30),
                                              step = 1),
-                                 tags$a(href = "#0", "Go to Table of Content", 
+                                 tags$a(href = "#0", "Quay lại Mục lục", 
                                         style = "display: inline-block; margin-top: 20px; padding: 5px 10px; background-color: #3283CD; 
                            float: right; color: white; border-radius: 5px; text-decoration: none;")
                                  
                     ),
                     #7. Potential cost savings####
-                    tags$div(id = "7", h4(strong('7. Tiết kiệm chi phí tiềm năng từ sự tồn tại của khu vườn trường học'))),
+                    tags$div(id = "7", h4(strong('7. Tiết kiệm chi phí khác nhờ có vườn trường'))),
                     
                     sidebarPanel(width = 12,
                                  style = "height: 60vh; overflow-y: auto;", #height in %
@@ -698,14 +700,14 @@ ui <- fluidPage(
                                              max = 500,
                                              value = c(20, 100),
                                              step = 1),
-                                 tags$a(href = "#0", "Go to Table of Content", 
+                                 tags$a(href = "#0", "Quay lại Mục lục", 
                                         style = "display: inline-block; margin-top: 20px; padding: 5px 10px; background-color: #3283CD; 
                            float: right; color: white; border-radius: 5px; text-decoration: none;")
                                  
                                  
                     ),
                     #8. Estimation of potential external investment####
-                    tags$div(id = "8", h4(strong('8.Ước tính về tiềm năng đầu tư nước ngoài'))),
+                    tags$div(id = "8", h4(strong('8.Ước tính tiềm năng thu hút đầu tư'))),
                     
                     p("Vận hành chương trình vườn trường có thể làm tăng danh tiếng của trường và do đó, điều này có thể dẫn đến nguồn đầu tư 
                       bổ sung từ bên ngoài trường học (ví dụ: các nhà tài trợ từ các doanh nghiệp địa phương). Tuy nhiên, điều này không chắc chắn."),
@@ -754,18 +756,18 @@ ui <- fluidPage(
                                              max = 200,
                                              value = c(50, 80),
                                              step = 1),
-                                 tags$a(href = "#0", "Go to Table of Content", 
+                                 tags$a(href = "#0", "Quay lại Mục lục", 
                                         style = "display: inline-block; margin-top: 20px; padding: 5px 10px; background-color: #3283CD; 
                            float: right; color: white; border-radius: 5px; text-decoration: none;")
                                  
                                  
                     ),
-                    #9. Assumption:####
-                    tags$div(id = "9", h4(strong('9.Giả định: Số lượng trái cây và rau quả trẻ em 
-                         Ăn/ăn vặt từ vườn không bị ảnh hưởng bởi phương pháp giảng dạy STEM.'))),
+                    #9. Impacts on health, performance and community engagement:####
+                    tags$div(id = "9", h4(strong('9. Tác động của vườn trường tới sức khỏe, học tập và hoạt động xã hội của trẻ
+                    '))),
                     
                     p("Children having a garden at their school might or might not eat and snack more fruits and vegetables 
-                 than children withour a school garden. This could potentially affect their health status, ability to concentrate 
+                 than children without a school garden. This could potentially affect their health status, ability to concentrate 
                  and learn as well as to be able to socially engage with their environment. We assume that the quantity children 
                  eat/snack fruits and vegetables from the garden is not affected by whether the garden is included in a STEM teaching approach or not."),
                     sidebarPanel(width = 12,
@@ -801,19 +803,19 @@ ui <- fluidPage(
                                              max = 1,
                                              value = c(0.01, 0.1),
                                              step = 0.01),
-                                 tags$a(href = "#0", "Go to Table of Content", 
+                                 tags$a(href = "#0", "Quay lại Mục lục", 
                                         style = "display: inline-block; margin-top: 20px; padding: 5px 10px; background-color: #3283CD; 
                            float: right; color: white; border-radius: 5px; text-decoration: none;")
                                  
                                  
                     ),
                     #10. mental health####
-                    tags$div(id = "10", h4(strong('10. Đánh giá sức khoẻ tâm thần từ vườn trường'))),
+                    tags$div(id = "10", h4(strong('10. Tác động lên sức khỏe tinh thần'))),
                     
                     p("Nghiên cứu y học đã xác nhận lợi ích về sức khỏe tinh thần của các khoảng không gian xanh tại các thành phố. 
                       Vườn trường được cho là có thể hoặc không có lợi ích về sức khỏe tinh thần"),
                     sidebarPanel(width = 12,
-                                 style = "height: 40vh; overflow-y: auto;", #height in %
+                                 style = "height: 20vh; overflow-y: auto;", #height in %
                                  
                                  h5(HTML("<b>10-1. Mental health value of children having a garden at school (million VND/year):</b>")),
                                  p("Vui lòng ước tính lợi ích đối với sức khỏe tinh thần (bằng tiền, hàng năm) từ không gian xanh của vườn 
@@ -825,14 +827,14 @@ ui <- fluidPage(
                                              max = 500,
                                              value = c(4, 300),
                                              step = 1),
-                                 tags$a(href = "#0", "Go to Table of Content", 
+                                 tags$a(href = "#0", "Quay lại Mục lục", 
                                         style = "display: inline-block; margin-top: 20px; padding: 5px 10px; background-color: #3283CD; 
                            float: right; color: white; border-radius: 5px; text-decoration: none;")
                                  
                                  
                     ),
                     #11. Estimation with and without a STEM####
-                    tags$div(id = "11", h4(strong('11. Ước tính có và không có phương pháp giảng dạy STEM'))),
+                    tags$div(id = "11", h4(strong('11. Kịch bản có và không có phương pháp giảng dạy STEM'))),
                     
                     p("Có khả năng trẻ em học ở những trường có vườn có thể (hoặc không) lựa chọn những thực phẩm tốt cho sức khỏe hơn là những trẻ em học 
                       ở những trường không có vườn. Điều này có khả năng ảnh hưởng đến tình trạng sức khỏe, khả năng tập trung và học hỏi cũng như khả năng 
@@ -903,17 +905,17 @@ ui <- fluidPage(
                                              max = 500,
                                              value = c(10, 250),
                                              step = 1),
-                                 tags$a(href = "#0", "Go to Table of Content", 
+                                 tags$a(href = "#0", "Quay lại Mục lục", 
                                         style = "display: inline-block; margin-top: 20px; padding: 5px 10px; background-color: #3283CD; 
                            float: right; color: white; border-radius: 5px; text-decoration: none;")
                                  
                                  
                     ),
-                    #12. ...####
-                    tags$div(id = "12", h4(strong('12. will update  '))),
+                    #12. Giá trị môi trường####
+                    tags$div(id = "12", h4(strong('12. Giá trị môi trường  '))),
                     
                     sidebarPanel(width = 12,
-                                 style = "height: 60vh; overflow-y: auto;", #height in %
+                                 style = "height: 40vh; overflow-y: auto;", #height in %
                                  
                                  h5(HTML("<b>12-1. Value of green space (million VND/year):</b>")),
                                  p("Hãy ước tính giá trị hàng năm của việc có được môi trường sống cho thực vật, động vật (triệu đồng/năm).",
@@ -933,11 +935,19 @@ ui <- fluidPage(
                                              max = 50,
                                              value = c(1, 3),
                                              step = 1),
+                                 tags$a(href = "#0", "Quay lại Mục lục", 
+                                        style = "display: inline-block; margin-top: 20px; padding: 5px 10px; background-color: #3283CD; 
+                           float: right; color: white; border-radius: 5px; text-decoration: none;")
                                  
-                                 p(),
-                                 p(),
-                                 h4(strong("School events")),
-                                 h5(HTML("<b>12-3. Value of garden related school events (million VND/year):</b>")),
+                                 
+                    ), # close sidebarPanel 12. 
+                    #13. Giá trị các sự kiện trường học.####
+                    tags$div(id = "13", h4(strong('13. Giá trị các sự kiện gắn với vườn trường'))),
+                    
+                    sidebarPanel(width = 12,
+                                 style = "height: 40vh; overflow-y: auto;", #height in %
+                                 
+                                 h5(HTML("<b>13-1. Value of garden related school events (million VND/year):</b>")),
                                  p("Hãy ước tính giá trị của một (1) sự kiện liên quan đến vườn trường đối với trường học và cộng đồng (triệu đồng/sự kiện)",
                                    style = "padding-left: 20px;"),
                                  sliderInput("school_event_value",
@@ -946,7 +956,7 @@ ui <- fluidPage(
                                              max = 500,
                                              value = c(10, 200),
                                              step = 1),
-                                 h5(HTML("<b>12-4. Number of school events per year (days per year):</b>")),
+                                 h5(HTML("<b>13-2. Number of school events per year (days per year):</b>")),
                                  p("Vui lòng ước tính số sự kiện trường học liên quan đến vườn mỗi năm (số ngày trong năm)",
                                    style = "padding-left: 20px;"),
                                  sliderInput("school_event_freq",
@@ -955,10 +965,20 @@ ui <- fluidPage(
                                              max = 50,
                                              value = c(3, 10),
                                              step = 1),
-                                 p(),
-                                 p(),
+                                 tags$a(href = "#0", "Quay lại Mục lục", 
+                                        style = "display: inline-block; margin-top: 20px; padding: 5px 10px; background-color: #3283CD; 
+                           float: right; color: white; border-radius: 5px; text-decoration: none;")
+                                 
+                                 
+                    ), # close sidebarPanel 13. 
+                    #14. Thông số liên quan đến sử dụng đất...####
+                    tags$div(id = "14", h4(strong('14. Thông số liên quan đến sử dụng đất'))),
+                    
+                    sidebarPanel(width = 12,
+                                 style = "height: 60vh; overflow-y: auto;", #height in %
+                                 
                                  h4(strong("Land Use")),
-                                 h5(HTML("<b>12-5. Value of non garden land use, playground etc. (million VND/yr):</b>")),
+                                 h5(HTML("<b>14-1. Value of non garden land use, playground etc. (million VND/yr):</b>")),
                                  p("Anh/chị vui lòng ước tình giá trị hàng năm mà mảnh đất mang lại với mục đích sử dụng hiện nay 
                                    (ví dụ: sân chơi cho trẻ em)",
                                    style = "padding-left: 20px;"),
@@ -968,7 +988,7 @@ ui <- fluidPage(
                                              max = 100,
                                              value = c(20, 50),
                                              step = 1),
-                                 h5(HTML("<b>12-6. Cost of non garden land use (million VND/yr):</b>")),
+                                 h5(HTML("<b>14-2. Cost of non garden land use (million VND/yr):</b>")),
                                  p("Vui lòng ước tính chi phí hàng năm của mục đích sử dụng khác của mảnh đất thay vì làm vườn 
                                    (ví dụ: chi phí san lấp, làm hàng rào, dọn dẹp?) (triệu đồng/năm)",
                                    style = "padding-left: 20px;"),
@@ -981,7 +1001,7 @@ ui <- fluidPage(
                                  p(),
                                  p(),
                                  h4(strong("Parking")),
-                                 h5(HTML("<b>12-7. Chance of including parking on the plot without a garden (%):</b>")),
+                                 h5(HTML("<b>14-3. Chance of including parking on the plot without a garden (%):</b>")),
                                  p("Anh/chị nghĩ có bao nhiêu %  khả năng diện tích đất dự định sử dụng cho vườn trường có 
                                    thể tạo ra thu nhập thay thế, ví dụ: nếu nó được sử dụng làm bãi đậu xe thay vì làm vườn trường (tính bằng %).",
                                    style = "padding-left: 20px;"),
@@ -991,7 +1011,7 @@ ui <- fluidPage(
                                              max = 100,
                                              value = c(10, 80),
                                              step = 1),
-                                 h5(HTML("<b>12-8. Above table value of parking (million VND/yr):</b>")),
+                                 h5(HTML("<b>14-4. Above table value of parking (million VND/yr):</b>")),
                                  p("Nếu có khả năng tạo ra thu nhập khác thay vì làm vườn trường, giá trị hàng năm của nguồn 
                                    thu nhập này từ mảnh đất là bao nhiêu?  (triệu đồng/năm)",
                                    style = "padding-left: 20px;"),
@@ -1001,21 +1021,20 @@ ui <- fluidPage(
                                              max = 10,
                                              value = c(0.2, 3),
                                              step = 0.1),
-                                 tags$a(href = "#0", "Go to Table of Content", 
+                                 tags$a(href = "#0", "Quay lại Mục lục", 
                                         style = "display: inline-block; margin-top: 20px; padding: 5px 10px; background-color: #3283CD; 
                            float: right; color: white; border-radius: 5px; text-decoration: none;")
                                  
                                  
-                    ), # close sidebarPanel 12. 
-                    #13. variables in Code but not in previous Questionnaires ####
-                    tags$div(id = "13", h4(strong('13. will update '))),
+                    ), # close sidebarPanel 14. 
+                    #15. Các biến số khác ####
+                    tags$div(id = "15", h4(strong('15. Các biến số khác'))),
                     
-                    p("Do you want to put this in Shiny as well?"),
                     sidebarPanel(width = 12,
                                  style = "height: 40vh; overflow-y: auto;", #height in %
                                  
-                                 h5(HTML("<b>13-1. Chance of school choosing to integrate animals in garden (%):</b>")),
-                                 p("explanation",
+                                 h5(HTML("<b>15-1. Chance of school choosing to integrate animals in garden (%):</b>")),
+                                 p("Khả năng trường sẽ đưa động vật vào trong mô hình",
                                    style = "padding-left: 20px;"),
                                  sliderInput("if_animals_in_garden_t",
                                              NULL,
@@ -1023,8 +1042,8 @@ ui <- fluidPage(
                                              max = 100,
                                              value = c(20, 70),
                                              step = 1),
-                                 h5(HTML("<b>13-2. Digging a fish pond in the garden (million VND):</b>")),
-                                 p("explanation",
+                                 h5(HTML("<b>15-2. Digging a fish pond in the garden (million VND):</b>")),
+                                 p("Khả năng trường cho đào ao cá",
                                    style = "padding-left: 20px;"),
                                  sliderInput("fishpond_cost",
                                              NULL,
@@ -1032,8 +1051,8 @@ ui <- fluidPage(
                                              max = 100,
                                              value = c(7, 10),
                                              step = 1),
-                                 h5(HTML("<b>13-3. Chance that the garden space is fallow green space (%):</b>")),
-                                 p("explanation",
+                                 h5(HTML("<b>15-3. Chance that the garden space is fallow green space (%):</b>")),
+                                 p("Khả năng khu đất làm vườn là đất trống",
                                    style = "padding-left: 20px;"),
                                  sliderInput("chance_garden_is_fallow_green_space_t",
                                              NULL,
@@ -1041,8 +1060,8 @@ ui <- fluidPage(
                                              max = 100,
                                              value = c(0.2, 5),
                                              step = 0.1),
-                                 h5(HTML("<b>13-4. Proportion of value of fallow greenspace compared to garden (%):</b>")),
-                                 p("explanation",
+                                 h5(HTML("<b>15-4. Proportion of value of fallow greenspace compared to garden (%):</b>")),
+                                 p("Phần trăm diện tích đất trống so với diện tích cả khu vườn",
                                    style = "padding-left: 20px;"),
                                  sliderInput("fallow_eco_reduction_t",
                                              NULL,
@@ -1050,8 +1069,8 @@ ui <- fluidPage(
                                              max = 100,
                                              value = c(50, 80),
                                              step = 1),
-                                 h5(HTML("<b>13-5. Value of non-garden green space for child health (million VND/year):</b>")),
-                                 p("explanation",
+                                 h5(HTML("<b>15-5. Value of non-garden green space for child health (million VND/year):</b>")),
+                                 p("Giá trị không gian xanh (không phải là vườn) đối với sức khỏe học sinh",
                                    style = "padding-left: 20px;"),
                                  sliderInput("green_space_health_value",
                                              NULL,
@@ -1059,8 +1078,8 @@ ui <- fluidPage(
                                              max = 50,
                                              value = c(1, 10),
                                              step = 1),
-                                 h5(HTML("<b>13-6. Proportion of value of fallow greenspace for child heatlh compared to garden (%):</b>")),
-                                 p("explanation",
+                                 h5(HTML("<b>15-6. Proportion of value of fallow greenspace for child heatlh compared to garden (%):</b>")),
+                                 p("Phần trăm giá trị không gian xanh đối với sức khỏe học sinh khi so sánh với cả khu vườn",
                                    style = "padding-left: 20px;"),
                                  sliderInput("fallow_health_reduction_t",
                                              NULL,
@@ -1068,8 +1087,8 @@ ui <- fluidPage(
                                              max = 100,
                                              value = c(50, 80),
                                              step = 1),
-                                 h5(HTML("<b>13-7. Chance that the school has acess to land (%):</b>")),
-                                 p("explanation",
+                                 h5(HTML("<b>15-7. Chance that the school has acess to land (%):</b>")),
+                                 p("Khả năng trường có tiếp cận đất",
                                    style = "padding-left: 20px;"),
                                  sliderInput("land_access_t",
                                              NULL,
@@ -1077,8 +1096,8 @@ ui <- fluidPage(
                                              max = 100,
                                              value = c(60, 95),
                                              step = 1),
-                                 h5(HTML("<b>13-8. Chance that the land at the school is suitable (%):</b>")),
-                                 p("explanation",
+                                 h5(HTML("<b>15-8. Chance that the land at the school is suitable (%):</b>")),
+                                 p("Khả năng khu đất phù hợp làm vườn trường",
                                    style = "padding-left: 20px;"),
                                  sliderInput("suitability_of_land_for_garden_t",
                                              NULL,
@@ -1086,8 +1105,8 @@ ui <- fluidPage(
                                              max = 100,
                                              value = c(60, 95),
                                              step = 1),
-                                 h5(HTML("<b>13-9. Chance that beurocratic barriers will inhibit the process (%):</b>")),
-                                 p("explanation",
+                                 h5(HTML("<b>15-9. Chance that beurocratic barriers will inhibit the process (%):</b>")),
+                                 p("Khả năng bị các rào cản liên quan đến hành chính, thủ tục gây cản trở quá trình xây dựng vườn trường",
                                    style = "padding-left: 20px;"),
                                  sliderInput("beurocratic_barriers_t",
                                              NULL,
@@ -1095,10 +1114,10 @@ ui <- fluidPage(
                                              max = 100,
                                              value = c(1, 50),
                                              step = 1),
-                                 tags$a(href = "#0", "Go to Table of Content", 
+                                 tags$a(href = "#0", "Quay lại Mục lục", 
                                         style = "display: inline-block; margin-top: 20px; padding: 5px 10px; background-color: #3283CD; 
                            float: right; color: white; border-radius: 5px; text-decoration: none;")
-                    ) # close sidebarPanel 13.
+                    ) # close sidebarPanel 15.
              ), #close left colum
              
              
@@ -1108,7 +1127,7 @@ ui <- fluidPage(
              column(5, class = "main-panel",
                     style = "height: 100vh; overflow-y: auto;",
                     wellPanel(
-                      p("Có thể mất vài giây để hiển thị biểu đồ với dữ liệu đầu vào của bạn."),
+                      p("Có thể mất chút thời gian để hiển thị biểu đồ."),
                       h3( strong('Kết quả')),
                       h5(strong("1. Giá trị hiện tại ròng (NPV)")),
                       plotOutput("distPlot1",height = "250px",
@@ -1158,12 +1177,14 @@ ui <- fluidPage(
            ), #close FluidRow
            
            fluidRow(
-             sidebarPanel(width = 12,
-                          fluidRow( h3( strong('More Idea')),
+             
+             sidebarPanel(width = 12, 
+                          
+                          fluidRow(tags$div(id = "16", h4(strong('Cải thiện mô hình'))),
                                     textAreaInput(width = "100%", 
                                                   height ='100px',
                                                   "Improvement_1", 
-                                                  "Xin hãy cho chúng tôi thêm ý tưởng để cải thiện mô hình của chúng tôi.")),
+                                                  "Xin hãy cho chúng tôi thêm ý tưởng để cải thiện mô hình.")),
                           fluidRow(align = "left",
                                    
                                    #save & download file####
