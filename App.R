@@ -1269,7 +1269,7 @@ server <- function(input, output, session) {
       
       if (grepl("_t$", var)) {
         "tnorm_0_1"  # Special logic for variables ending with "_t"
-      } else if (grepl("_c$", var)) {  # Check if variable name ends with "_t"
+      } else if (grepl("_c$", var)) {  # Check if variable name ends with "_c"
         "const"  # Special logic for sliders with names ending in "_t"
       } else if (grepl("_1$", var)) {
         as.character(value)   # Default behavior
