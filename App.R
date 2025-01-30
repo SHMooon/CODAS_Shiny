@@ -1,5 +1,5 @@
 
-#
+#Put names
 # This is a Shiny web application. You can run the application by clicking
 # the 'Run App' button above.
 #
@@ -116,11 +116,15 @@ ui <- fluidPage(
   # ),
   
   
-  tabPanel("2.Version", h1("2. Version"),
-           class= "tabPanel",
+  tabPanel("2.Version", class= "tabPanel",
            
            fluidRow(
-             column(4, textInput("Date_1", "Ngày")),  # Each column takes up 4/12 of the width
+           column(12, h5("School garden Version 25.01.30"),
+                  h5 ("Authors: Sanghyo Moon"),
+                  align = "right"      )
+           ),
+           fluidRow(
+             column(4, textInput("Date_1", "Ngày (tùy chọn)")),  # Each column takes up 4/12 of the width
              column(4, textInput("Organization_1", "Tổ chức của bạn (tùy chọn)")),
              column(4, textInput("Name_1", "Tên của bạn (tùy chọn)"))
            ),
@@ -144,19 +148,23 @@ ui <- fluidPage(
                     
                    
                     
-                    tags$div(id = "1", h4(strong('1. Giới thiệu'))),
-                    p("Hãy trả lời những câu hỏi sau đây. Hãy đặt mình vào vị trí thành viên Ban Giám Hiệu của một trường học ở nội thành Hà Nội."),
-                    p("Bạn muốn đưa ra quyết định có nên vận hành vườn trường trong khuôn viên trường học hay không và có tích hợp vườn trường này vào phương pháp giảng dạy STEM hay không."),
-                    p("Mô hình lý thuyết của quyết định này được xây dựng với sự tham gia một nhóm chuyên gia và tổ chức phi chính phủ CODAS. "),
-                    p("Mô hình lý thuyết này cho thấy tất cả các nhân tố (biến số) liên quan và ảnh hưởng đến quyết định và mỗi nhân tố cần được đánh giá định lượng bằng cách đưa ra các khoảng giá trị hợp lý. "),
-                    p("Vui lòng cung cấp các khoảng giá trị mà anh chị chắc chắn 90% là giá trị chính xác sẽ nằm trong khoảng giá trị này, giống như khi bạn đưa ra khoảng giá trị khi tham gia tập huấn hiệu chỉnh trong dự án NIFAM. "),
-                    p("Một mô hình toán học đã được phát triển để mô phỏng kết quả của 10 năm hoạt động của vườn trường dựa vào giá trị đã hiệu chỉnh của các biến đầu vào được cung cấp bởi chuyên gia."),
+                    tags$div(id = "0_1", h4(strong('Giới thiệu về mô hình vườn trường'))),
+                    p("Mô hình ra quyết định cho can thiệp dinh dưỡng bằng vườn trường tại khu vực đô thị Hà Nội. Có ba phương án đầu tư:
+                                        "),
+                    p("1.	Xây dựng vườn trường trên khuôn viên sẵn có của trường:
+                    Vườn được xây dựng thêm một cách không chính thức, sử dụng thụ động cho mục đích giáo dục "),
+                    p("2.	Vườn trường trở thành một phần chính thức của chương trình giáo dục STEM:
+                    Được sử dụng cho mục đích giáo dục, kèm theo các chi phí đào tạo và chi phí khác, nhưng bù đắp bằng việc giảm chi phí giáo dục và hoạt động ngoại khóa.
+                    "),
+                    p("3.	Duy trì việc sử dụng đất như hiện tại, không thay đổi gì:
+                    Diện tích đất được tiếp tục sử dụng cho các mục đích khác như khu vui chơi thay vì làm vườn trường."),
                     br(),
                     
-                    tags$div(id = "0", h4(strong("Mục lục"))),
+                    tags$div(id = "0", h4(strong("Cung cấp số liệu đầu vào cho mô hình"))),
                     
-                    tags$a(href = "#1", "1. Giới thiệu", style = "display: block; margin-bottom: 5px;"),
-                    tags$a(href = "#2", "2. Ước tính chung về một khu vườn trường học 1", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#1", "Hướng dẫn cách cung cấp số liệu", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#2", "1. Các biến Cung cấp số liệu cho từng biến", style = "display: block; margin-bottom: 5px;"),
+                    tags$a(href = "#2.1", "2. Ước tính chung về một khu vườn trường học 1", style = "display: block; margin-bottom: 5px;"),
                     tags$a(href = "#3", "3. Ước tính chung về một khu vườn trường học 2", style = "display: block; margin-bottom: 5px;"),
                     tags$a(href = "#4", "4. Chi phí đầu tư xây dựng một khu vườn", style = "display: block; margin-bottom: 5px;"),
                     tags$a(href = "#5", "5. Chi phí hoạt động của vườn trường", style = "display: block; margin-bottom: 5px;"),
@@ -170,8 +178,16 @@ ui <- fluidPage(
                     tags$a(href = "#13", "13. will update", style = "display: block; margin-bottom: 5px;"),
                     br(),
                     
-                    #1.Introduction####
+                    #1.Introduction on data input provision####
                     useShinyjs(),  # Initialize shinyjs
+                    tags$div(id = "1", h4(strong('Hướng dẫn cách cung cấp số liệu'))),
+                    p("Hãy trả lời những câu hỏi sau đây. Hãy đặt mình vào vị trí thành viên Ban Giám Hiệu của một trường học ở nội thành Hà Nội.
+                      Bạn muốn đưa ra quyết định có nên vận hành vườn trường trong khuôn viên trường học hay không và có tích hợp vườn trường này vào phương pháp giảng dạy STEM hay không.
+                      Mô hình lý thuyết của quyết định này được xây dựng với sự tham gia một nhóm chuyên gia và tổ chức phi chính phủ CODAS. 
+                      Mô hình lý thuyết này cho thấy tất cả các nhân tố (biến số) liên quan và ảnh hưởng đến quyết định và mỗi nhân tố cần được đánh giá định lượng bằng cách đưa ra các khoảng giá trị hợp lý.
+                      Vui lòng cung cấp các khoảng giá trị mà anh chị chắc chắn 90% là giá trị chính xác sẽ nằm trong khoảng giá trị này, giống như khi bạn đưa ra khoảng giá trị khi tham gia tập huấn hiệu chỉnh trong dự án NIFAM.
+                      Một mô hình toán học đã được phát triển để mô phỏng kết quả của 10 năm hoạt động của vườn trường dựa vào giá trị đã hiệu chỉnh của các biến đầu vào được cung cấp bởi chuyên gia."),
+                    
                     sidebarPanel(  id = "sidebar",  # Assign an ID to the sidebar
                                    width = 12,
                                    style = "height: 60vh; overflow-y: auto;", #height in % 
