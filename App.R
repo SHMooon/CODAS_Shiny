@@ -1990,15 +1990,15 @@ server <- function(input, output, session) {
     
     # Process Data
     garden_data_1 <- garden_data %>% 
-      mutate(group = ifelse(NPV_garden_public_school < 0 & NPV_garden_STEM_public_school < 0, "No", "Yes")) %>%
-      group_by(group) %>%
-      summarise(
+      dplyr::mutate(group = ifelse(NPV_garden_public_school < 0 & NPV_garden_STEM_public_school < 0, "No", "Yes")) %>%
+      dplyr::group_by(group) %>%
+      dplyr::summarise(
         NPV_total_garden = sum(abs(NPV_garden_public_school)),  # Absolute values to avoid negatives
         NPV_total_garden_STEM_public_school = sum(abs(NPV_garden_STEM_public_school))) %>%
-      mutate(
+      dplyr::mutate(
         prop_garden = NPV_total_garden / sum(NPV_total_garden) * 100,
         prop_STEM_garden = NPV_total_garden_STEM_public_school / sum(NPV_total_garden_STEM_public_school) * 100 ) %>%
-      mutate(ypos_garden = cumsum(prop_garden) - 0.5 * prop_garden,
+      dplyr::mutate(ypos_garden = cumsum(prop_garden) - 0.5 * prop_garden,
              ypos_STEM_garden = cumsum(prop_STEM_garden) - 0.5 * prop_STEM_garden)
     
     # Plot
