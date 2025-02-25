@@ -1968,7 +1968,7 @@ server <- function(input, output, session) {
     garden_simulation_results()$y
   })
   
-  source("www/functions/plot_distributions_1.R", local = TRUE)
+  #source("www/functions/plot_distributions_1.R", local = TRUE)
   
   output$distPlot1 <- renderPlot({
     decisionSupport::plot_distributions(
