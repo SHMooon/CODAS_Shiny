@@ -26,6 +26,7 @@ library(shinythemes)
 library(ggplot2)
 library(shinyjs)
 library(dplyr)
+library(scales)
 
 
 # Model of the school garden (see Index.RMD for the explaination and posthoc)
@@ -1247,8 +1248,8 @@ ui <- fluidPage(
              tableOutput("output_table_x")
            )
            
-  ),#finish fourth tabPanel
-  #third table
+  ),#finish third tabPanel
+  #fourth table
   tabPanel("Output Y",
            h3("Output Data"),
            class= "tabPanel",
@@ -1256,7 +1257,20 @@ ui <- fluidPage(
              tableOutput("output_table_y")
            )
            
+  ), ##finish fourth tabPanel
+  #fifth table
+  tabPanel("Output Y/N",
+           h3("Output Y/N"),
+           class= "tabPanel",
+           fluidRow(
+             tableOutput("garden_data_long")
+           )
+           
   )#finish fourth tabPanel
+  
+  
+  
+  
   ) # closed tabsetPanel
   
 )# UI closed
@@ -2062,13 +2076,80 @@ server <- function(input, output, session) {
     
   })
   
+  # Basic table output
+  output$garden_data_long <- renderTable({
+    garden_data_long <- garden_simulation_results()$y %>%
+      dplyr::mutate(NPV_garden_public_school_group = ifelse(NPV_garden_public_school < 0, "No", "Yes"),
+                    NPV_garden_STEM_public_school_group = ifelse(NPV_garden_STEM_public_school < 0, "No", "Yes")
+      ) %>%
+      tidyr::pivot_longer(
+        cols = c(NPV_garden_public_school_group, NPV_garden_STEM_public_school_group),
+        names_to = "name",
+        values_to = "group"
+      ) %>%
+      dplyr::mutate(name = dplyr::recode(name, 
+                                         "NPV_garden_public_school_group" = "public school \ngarden",
+                                         "NPV_garden_STEM_public_school_group" = "public school \nSTEM garden")
+      )%>%
+      dplyr::mutate(name = factor(name, levels = c("public school \ngarden", "public school \nSTEM garden"))) %>%
+      dplyr::group_by(name, group) %>%
+      dplyr::summarise(
+        count = n(),
+        percent = round(100 * n() / nrow(garden_simulation_results()$y), 1),
+        .groups = "drop"
+      )
+  })
+  
+  
   plot3 <- reactive({
-    decisionSupport::plot_cashflow(mcSimulation_object = garden_simulation_results(), 
-                                                           cashflow_var_name = "Cashflow_garden", 
-                                                           facet_labels = "Garden") + 
-      theme(legend.position = "none", axis.title.x = element_blank(), 
-            axis.text.x = element_blank(),
-            axis.ticks = element_blank())  
+    
+    
+    garden_data_long <- garden_simulation_results()$y %>%
+      dplyr::mutate(NPV_garden_public_school_group = ifelse(NPV_garden_public_school < 0, "No", "Yes"),
+                    NPV_garden_STEM_public_school_group = ifelse(NPV_garden_STEM_public_school < 0, "No", "Yes")
+      ) %>%
+      tidyr::pivot_longer(
+        cols = c(NPV_garden_public_school_group, NPV_garden_STEM_public_school_group),
+        names_to = "name",
+        values_to = "group"
+      ) %>%
+      dplyr::mutate(name = dplyr::recode(name, 
+                                         "NPV_garden_public_school_group" = "public school \ngarden",
+                                         "NPV_garden_STEM_public_school_group" = "public school \nSTEM garden")
+      )%>%
+      dplyr::mutate(name = factor(name, levels = c("public school \ngarden", "public school \nSTEM garden"))) %>%
+      dplyr::group_by(name, group) %>%
+      dplyr::summarise(
+        count = n(),
+        percent = round(100 * n() / nrow(garden_simulation_results()$y), 1),
+        .groups = "drop"
+      )
+    
+    # Plot
+    ggplot2::ggplot(garden_data_long, aes(x = name, y = percent, fill = group)) + 
+      ggplot2::geom_bar(stat = "identity",color = "white", alpha = 0.3,
+                        position = position_stack(reverse = TRUE)) +  # Use "stack" instead of "fill"
+      ggplot2::geom_text(aes(label = paste0(round(percent, 1), "%")), 
+                         position = position_stack(vjust = 0.5,reverse = TRUE), 
+                         size = 5, color = "black") +  # Add percentage labels
+      ggplot2::scale_fill_manual(values = c("Yes" = "blue", "No" = "red")) +
+    
+      ggplot2::coord_flip() +  
+      ggplot2::theme_minimal() + 
+      ggplot2::theme(
+        axis.title.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_text(size = 12, face = "bold"),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.title.x = element_blank(),
+        legend.position = "bottom", 
+        legend.justification = "center",
+        legend.direction = "horizontal",  # Make the legend horizontal
+        legend.box.spacing = unit(0.5, "cm")
+      ) +
+      ggplot2::labs(fill = "Decision")
+      
   })
   
   
