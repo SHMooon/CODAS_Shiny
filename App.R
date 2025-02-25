@@ -1967,9 +1967,10 @@ server <- function(input, output, session) {
     garden_simulation_results()$y
   })
   
-  source("functions/plot_distributions.R")
+  
   ### Define reactive expressions for each plot
   plot1 <- reactive({
+    source("functions/plot_distributions.R")
     plot_distributions(
       mcSimulation_object = garden_simulation_results(), 
                          vars = c("NPV_garden_public_school", 
