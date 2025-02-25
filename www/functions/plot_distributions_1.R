@@ -2,7 +2,7 @@
 # load the tidyverse library
 library(tidyverse)
 
-plot_distributions <- function (mcSimulation_object, vars, method = "smooth_simple_overlay", 
+plot_distributions_1 <- function (mcSimulation_object, vars, method = "smooth_simple_overlay", 
                                 bins = 150, old_names = NULL, new_names = NULL, colors = NULL, 
                                 outlier_shape = ".", x_axis_name = "Outcome distribution", 
                                 y_axis_name = NULL, base_size = 11, ...) 

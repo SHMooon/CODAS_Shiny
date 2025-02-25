@@ -25,6 +25,7 @@ library(bslib)
 library(shinythemes)
 library(ggplot2)
 library(shinyjs)
+library(dplyr)
 
 
 # Model of the school garden (see Index.RMD for the explaination and posthoc)
@@ -1967,10 +1968,10 @@ server <- function(input, output, session) {
     garden_simulation_results()$y
   })
   
-  source("www/functions/plot_distributions.R", local = TRUE)
+  source("www/functions/plot_distributions_1.R", local = TRUE)
   
   output$distPlot1 <- renderPlot({
-    plot_distributions(
+    plot_distributions_1(
       mcSimulation_object = garden_simulation_results(), 
       vars = c("NPV_garden_public_school", 
                "NPV_garden_STEM_public_school"),
