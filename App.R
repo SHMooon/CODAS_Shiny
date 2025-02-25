@@ -126,7 +126,7 @@ ui <- fluidPage(
            
            fluidRow(
            column(12, h5("School garden Version: 25.02.25"),
-                  h5 ("Authors: Sanghyo Moon & Cory Whitney"),
+                  h5 ("Authors: Sanghyo Moon, Cory Whitney, & Luu Thi Thu Giang"),
                   align = "right"      )
            ),
            fluidRow(width = 12,
