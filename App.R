@@ -14,6 +14,9 @@
 #put explanation of graphics 
 #scroll color 
 
+
+
+
 #change the presented grapha: legend, labels... 
 
 
@@ -26,6 +29,9 @@ library(shinyjs)
 
 # Model of the school garden (see Index.RMD for the explaination and posthoc)
 library(decisionSupport)
+
+# creat NIFAM folder in Server
+# dir.create("user-states/NIFAM/", recursive = T)
 
 
 # Define UI for application that draws a histogram
@@ -115,7 +121,7 @@ ui <- fluidPage(
   # tabPanel("Seedling",h1("Tomatenjungepflanzeproduktion")
   # ),
   
-  
+  tabsetPanel(
   tabPanel("2.Version", class= "tabPanel",
            
            fluidRow(
@@ -123,6 +129,10 @@ ui <- fluidPage(
                   h5 ("Authors: Sanghyo Moon"),
                   align = "right"      )
            ),
+           fluidRow(width = 12,
+                    uiOutput("login_status"),
+                    uiOutput("project_info"),
+                    p("updating")),
            fluidRow(
              column(4, textInput("Date_1", "Ngày (tùy chọn)")),  # Each column takes up 4/12 of the width
              column(4, textInput("Organization_1", "Tổ chức của bạn (tùy chọn)")),
@@ -1216,8 +1226,37 @@ ui <- fluidPage(
            
            
            
-  ) # closed tabPanel
-  #) # closed tabsetPanel
+  ), # closed tabPanel
+  
+  # second tabPanel ####
+  tabPanel("Input",
+           h3("Input Table"),
+           class= "tabPanel",
+           fluidRow(
+             tableOutput("simple_table")
+           )
+           
+  ),#finish second tabPanel
+  
+  #third table
+  tabPanel("Output X",
+           h3("Output Data"),
+           class= "tabPanel",
+           fluidRow(
+             tableOutput("output_table_x")
+           )
+           
+  ),#finish fourth tabPanel
+  #third table
+  tabPanel("Output Y",
+           h3("Output Data"),
+           class= "tabPanel",
+           fluidRow(
+             tableOutput("output_table_y")
+           )
+           
+  )#finish fourth tabPanel
+  ) # closed tabsetPanel
   
 )# UI closed
 
@@ -1225,6 +1264,7 @@ ui <- fluidPage(
 
 
 server <- function(input, output, session) {
+  
   
   # observeEvent(input$toggleSidebar, {
   #   toggle("sidebar")  # Toggles the visibility of the sidebar
@@ -1913,11 +1953,24 @@ server <- function(input, output, session) {
       functionSyntax = "plainNames"
     )
   })
+ 
   
   
+  # Basic table output
+  output$output_table_x <- renderTable({
+    garden_simulation_results()$x
+  })
+   
+  
+  # Basic table output
+  output$output_table_y <- renderTable({
+    garden_simulation_results()$y
+  })
+  
+  source("functions/plot_distributions.R")
   ### Define reactive expressions for each plot
   plot1 <- reactive({
-    decisionSupport::plot_distributions(
+    plot_distributions(
       mcSimulation_object = garden_simulation_results(), 
                          vars = c("NPV_garden_public_school", 
                                   "NPV_garden_STEM_public_school"),
@@ -1927,15 +1980,64 @@ server <- function(input, output, session) {
                          base_size = 7, 
                          x_axis_name = "Comparative NPV outcomes")
   })
+  
   plot2 <- reactive({
-    decisionSupport::plot_distributions(
-      mcSimulation_object = garden_simulation_results(), 
-                                        vars = c("NPV_garden_public_school", "NPV_garden_STEM_public_school"),
-                                        old_names = c("NPV_garden_public_school", "NPV_garden_STEM_public_school"),
-                                        new_names = c("NPV public school garden", "NPV public school garden with STEM"),
-                                        method = "boxplot_density", 
-                                        base_size = 7, 
-                                        x_axis_name = "Comparative NPV outcomes")
+    
+    # Extract the dataframe from mcSimulation object
+    garden_data <- garden_simulation_results()$y  
+    
+    # Process Data
+    garden_data_1 <- garden_data %>% 
+      mutate(group = ifelse(NPV_garden_public_school < 0 & NPV_garden_STEM_public_school < 0, "No", "Yes")) %>%
+      group_by(group) %>%
+      summarise(
+        NPV_total_garden = sum(abs(NPV_garden_public_school)),  # Absolute values to avoid negatives
+        NPV_total_garden_STEM_public_school = sum(abs(NPV_garden_STEM_public_school))) %>%
+      mutate(
+        prop_garden = NPV_total_garden / sum(NPV_total_garden) * 100,
+        prop_STEM_garden = NPV_total_garden_STEM_public_school / sum(NPV_total_garden_STEM_public_school) * 100 ) %>%
+      mutate(ypos_garden = cumsum(prop_garden) - 0.5 * prop_garden,
+             ypos_STEM_garden = cumsum(prop_STEM_garden) - 0.5 * prop_STEM_garden)
+    
+    # Plot
+    ggplot2::ggplot(garden_data_1) +
+      # Garden Bar
+      ggplot2::geom_bar(aes(x = factor(1), y = prop_garden, fill = group), 
+                        stat = "identity", width = 0.5, color = "white", alpha = 0.3, 
+                        position = position_stack(reverse = TRUE)) +  
+      # STEM Garden Bar
+      ggplot2::geom_bar(aes(x = factor(2), y = prop_STEM_garden, fill = group), 
+                        stat = "identity", width = 0.5, color = "white", alpha = 0.3, 
+                        position = position_stack(reverse = TRUE)) +  
+      # Text Labels for Garden
+      ggplot2::geom_text(aes(x = factor(1), y = ypos_garden, 
+                             label = paste0(round(prop_garden, 1), "%")), 
+                         color = "black", size = 5, fontface = "bold") +
+      # Text Labels for STEM Garden
+      ggplot2::geom_text(aes(x = factor(2), y = ypos_STEM_garden, 
+                             label = paste0(round(prop_STEM_garden, 1), "%")), 
+                         color = "black", size = 5, fontface = "bold") +
+      # Custom Colors
+      ggplot2::scale_fill_manual(values = c("Yes" = "blue", "No" = "red")) +
+      # Flip for Horizontal Bars
+      ggplot2::coord_flip() +  
+      # Minimal Theme
+      ggplot2::theme_minimal() + 
+      # Adjust Styling
+      ggplot2::theme(
+        
+        axis.title.y = element_blank(),
+        axis.text.x = element_text(size = 12, face = "bold"),
+        axis.ticks.x = element_blank(),
+        axis.title.x = element_blank(),
+        legend.position = "bottom", 
+        legend.justification = "center",
+        legend.direction = "horizontal",  # Make the legend horizontal
+        legend.box.spacing = unit(0.5, "cm")
+      )+
+      scale_x_discrete(labels = c("2"="Garden", "1"="STEM Garden"))+
+      labs(fill = "Decision")
+    
   })
   
   plot3 <- reactive({
@@ -1946,6 +2048,7 @@ server <- function(input, output, session) {
             axis.text.x = element_blank(),
             axis.ticks = element_blank())  
   })
+  
   
   
   ### Render the plots using the reactive expressions
@@ -1963,7 +2066,7 @@ server <- function(input, output, session) {
   createDownloadHandler <- function(plot_reactive, filename_prefix) {
     downloadHandler(
       filename = function() {
-        paste(filename_prefix, input$project_name, format( Sys.Date(), "%Y-%m-%d"), ".png", sep = "")
+        paste(filename_prefix, format( Sys.Date(), "%Y-%m-%d"), ".png", sep = "")
       },
       content = function(file) {
         ggsave(file, plot = plot_reactive(), device = "png")
@@ -2049,6 +2152,10 @@ server <- function(input, output, session) {
       stringsAsFactors = FALSE)
   })
   
+  # Basic table output
+  output$simple_table <- renderTable({
+    input_estimates_table()
+  })
   
   output$saveDownload <- downloadHandler(            # Create the download file name
     filename = function() {
