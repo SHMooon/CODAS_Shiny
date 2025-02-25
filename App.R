@@ -1967,20 +1967,21 @@ server <- function(input, output, session) {
     garden_simulation_results()$y
   })
   
+  source("functions/plot_distributions.R")
   
-  ### Define reactive expressions for each plot
-  plot1 <- reactive({
-    source("functions/plot_distributions.R")
+  output$distPlot1 <- renderPlot({
     plot_distributions(
       mcSimulation_object = garden_simulation_results(), 
-                         vars = c("NPV_garden_public_school", 
-                                  "NPV_garden_STEM_public_school"),
-                         old_names = c("NPV_garden_public_school", "NPV_garden_STEM_public_school"),
-                         new_names = c("NPV public school garden", "NPV public school garden with STEM"),
-                         method = 'smooth_simple_overlay', 
-                         base_size = 7, 
-                         x_axis_name = "Comparative NPV outcomes")
+      vars = c("NPV_garden_public_school", 
+               "NPV_garden_STEM_public_school"),
+      old_names = c("NPV_garden_public_school", "NPV_garden_STEM_public_school"),
+      new_names = c("NPV public school garden", "NPV public school garden with STEM"),
+      method = 'smooth_simple_overlay', 
+      base_size = 7, 
+      x_axis_name = "Comparative NPV outcomes")
   })
+
+ 
   
   plot2 <- reactive({
     
@@ -2055,9 +2056,7 @@ server <- function(input, output, session) {
   
   
   ### Render the plots using the reactive expressions
-  output$distPlot1 <- renderPlot({
-    plot1()
-  })
+
   output$distPlot2 <- renderPlot({
     plot2()
   })
