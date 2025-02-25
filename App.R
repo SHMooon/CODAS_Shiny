@@ -1967,7 +1967,7 @@ server <- function(input, output, session) {
     garden_simulation_results()$y
   })
   
-  source(here::here("www/functions", "plot_distributions.R"))
+  reactive({ source("www/functions/plot_distributions.R")})
   
   output$distPlot1 <- renderPlot({
     plot_distributions(
