@@ -1160,16 +1160,16 @@ ui <- fluidPage(
                       plotOutput("distPlot2",height = "250px",
                                  width = "95%"),
                       h5(strong('Figure 2. Kết quả xác suất của quyết định xét về NPV trong giai đoạn mô phỏng.')),
-                    
-                      p('Biểu đồ trên minh họa kết quả dưới dạng NPV tính bằng  € / ha trở lên 
-                        những năm được mô phỏng, so sánh kịch bản cơ bản với sự can thiệp. 
-                        Nó nêu bật sự khác biệt về dòng tiền thuần giữa hai phương án. 
-                        Độ lệch phải của biểu đồ cho thấy rằng sự can thiệp nói chung là 
-                        thuận lợi Tuy nhiên, kể từ khi phân phối bao gồm cả tích cực và 
-                        giá trị âm, vẫn còn một xác suất không bằng 0 rằng sự can thiệp 
-                        có thể không phải lúc nào cũng mang lại kết quả thuận lợi hơn đường cơ sở. Là... 
-                        đồ thị hộp tích hợp cho thấy rằng trong khi phạm vi liên quý (IQR) phần lớn là tích cực, 
-                        nó bao gồm một số giá trị âm. Đường thẳng đứng trong biểu đồ hộp đại diện cho NPV trung bình.'),
+                      p("Figure for students. an explanation for students will be updated"),
+                      # p('Biểu đồ trên minh họa kết quả dưới dạng NPV tính bằng  € / ha trở lên 
+                      #   những năm được mô phỏng, so sánh kịch bản cơ bản với sự can thiệp. 
+                      #   Nó nêu bật sự khác biệt về dòng tiền thuần giữa hai phương án. 
+                      #   Độ lệch phải của biểu đồ cho thấy rằng sự can thiệp nói chung là 
+                      #   thuận lợi Tuy nhiên, kể từ khi phân phối bao gồm cả tích cực và 
+                      #   giá trị âm, vẫn còn một xác suất không bằng 0 rằng sự can thiệp 
+                      #   có thể không phải lúc nào cũng mang lại kết quả thuận lợi hơn đường cơ sở. Là... 
+                      #   đồ thị hộp tích hợp cho thấy rằng trong khi phạm vi liên quý (IQR) phần lớn là tích cực, 
+                      #   nó bao gồm một số giá trị âm. Đường thẳng đứng trong biểu đồ hộp đại diện cho NPV trung bình.'),
                       downloadButton("save_plot2", "Tải về đồ thị"),
                       
                       br(), # blank line
@@ -2057,7 +2057,7 @@ server <- function(input, output, session) {
         legend.direction = "horizontal",  # Make the legend horizontal
         legend.box.spacing = unit(0.5, "cm")
       )+
-      scale_x_discrete(labels = c("2"="Garden", "1"="STEM\nGarden"))+
+      scale_x_discrete(labels = c("2"="Garden", "1"="STEM \nGarden"))+
       labs(fill = "Decision")
     
   })
