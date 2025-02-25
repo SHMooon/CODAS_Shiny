@@ -25,7 +25,6 @@ library(bslib)
 library(shinythemes)
 library(ggplot2)
 library(shinyjs)
-library(here)
 
 
 # Model of the school garden (see Index.RMD for the explaination and posthoc)
@@ -1950,7 +1949,7 @@ server <- function(input, output, session) {
     mcSimulation(
       estimate = as.estimate(input_estimates()),  # Pass the modified object
       model_function = school_garden_function,
-      numberOfModelRuns = 1e4, # Run 10,000 simulations
+      numberOfModelRuns = 100, # change later to Run 1e4 simulations
       functionSyntax = "plainNames"
     )
   })
