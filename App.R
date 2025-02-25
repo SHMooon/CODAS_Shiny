@@ -1967,7 +1967,7 @@ server <- function(input, output, session) {
     garden_simulation_results()$y
   })
   
-  reactive({ source("www/functions/plot_distributions.R")})
+  source("www/functions/plot_distributions.R", local = TRUE)
   
   output$distPlot1 <- renderPlot({
     plot_distributions(
@@ -1981,12 +1981,11 @@ server <- function(input, output, session) {
       x_axis_name = "Comparative NPV outcomes")
   })
 
- 
-  
   plot2 <- reactive({
     
     # Extract the dataframe from mcSimulation object
     garden_data <- garden_simulation_results()$y  
+    
     
     # Process Data
     garden_data_1 <- garden_data %>% 
@@ -2001,6 +2000,7 @@ server <- function(input, output, session) {
       dplyr::mutate(ypos_garden = cumsum(prop_garden) - 0.5 * prop_garden,
              ypos_STEM_garden = cumsum(prop_STEM_garden) - 0.5 * prop_STEM_garden)
     
+
     # Plot
     ggplot2::ggplot(garden_data_1) +
       # Garden Bar
