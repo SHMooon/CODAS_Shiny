@@ -125,8 +125,8 @@ ui <- fluidPage(
   tabPanel("2.Version", class= "tabPanel",
            
            fluidRow(
-           column(12, h5("School garden Version 25.01.30"),
-                  h5 ("Authors: Sanghyo Moon"),
+           column(12, h5("School garden Version 25.02.25"),
+                  h5 ("Authors: Sanghyo Moon, Luu Thi Thu Giang, Cory Whitney"),
                   align = "right"      )
            ),
            fluidRow(width = 12,
@@ -2027,7 +2027,9 @@ server <- function(input, output, session) {
       ggplot2::theme(
         
         axis.title.y = element_blank(),
-        axis.text.x = element_text(size = 12, face = "bold"),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
         axis.title.x = element_blank(),
         legend.position = "bottom", 
