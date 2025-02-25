@@ -1968,18 +1968,35 @@ server <- function(input, output, session) {
     garden_simulation_results()$y
   })
   
-  #source("www/functions/plot_distributions_1.R", local = TRUE)
-  
+
   output$distPlot1 <- renderPlot({
-    decisionSupport::plot_distributions(
-      mcSimulation_object = garden_simulation_results(), 
-      vars = c("NPV_garden_public_school", 
-               "NPV_garden_STEM_public_school"),
-      old_names = c("NPV_garden_public_school", "NPV_garden_STEM_public_school"),
-      new_names = c("NPV public school garden", "NPV public school garden with STEM"),
-      method = 'smooth_simple_overlay', 
-      base_size = 7, 
-      x_axis_name = "Comparative NPV outcomes")
+    
+    
+    garden_data_long <- garden_simulation_results()$y %>%
+      tidyr::pivot_longer(cols = c("NPV_garden_public_school", "NPV_garden_STEM_public_school"),
+                          names_to = "name", values_to = "value") %>%
+      dplyr::mutate(name = dplyr::recode(name, 
+                                         "NPV_garden_public_school" = "public school garden",
+                                         "NPV_garden_STEM_public_school" = "public school STEM garden"))
+    
+    colors <- c("#009999", "#0000FF", "#56B4E9", "#009E73", 
+                "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+    
+    ggplot2::ggplot(garden_data_long, 
+                    ggplot2::aes(x = value, group = name, fill = name, color = name)) + 
+      ggplot2::geom_density(alpha = 0.1, linewidth = 0.5) +  # Density plot
+      ggplot2::scale_x_continuous(expand = ggplot2::expansion(mult = 0.01), labels = scales::comma) + 
+      ggplot2::scale_y_continuous(expand = ggplot2::expansion(mult = 0.01), labels = scales::comma) + 
+      ggplot2::scale_fill_manual(values = colors) + 
+      ggplot2::scale_color_manual(values = colors) + 
+      ggplot2::labs(x = "Comparative NPV outcomes", y = "Density", fill = "Decision option", color = "Decision option") + 
+      ggplot2::theme_bw() +
+      ggplot2::theme(
+        legend.position = c(0.98, 0.98),  # Legend in top-right corner
+        legend.justification = c(1, 1)
+      ) 
+    
+    
   })
 
   plot2 <- reactive({
@@ -2031,7 +2048,7 @@ server <- function(input, output, session) {
         
         axis.title.y = element_blank(),
         axis.ticks.y = element_blank(),
-        axis.text.y = element_blank(),
+        axis.text.y = element_text(size = 12, face = "bold"),
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank(),
         axis.title.x = element_blank(),
@@ -2040,7 +2057,7 @@ server <- function(input, output, session) {
         legend.direction = "horizontal",  # Make the legend horizontal
         legend.box.spacing = unit(0.5, "cm")
       )+
-      scale_x_discrete(labels = c("2"="Garden", "1"="STEM Garden"))+
+      scale_x_discrete(labels = c("2"="Garden", "1"="STEM\nGarden"))+
       labs(fill = "Decision")
     
   })
