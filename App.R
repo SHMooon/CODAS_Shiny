@@ -1971,7 +1971,7 @@ server <- function(input, output, session) {
   source("www/functions/plot_distributions_1.R", local = TRUE)
   
   output$distPlot1 <- renderPlot({
-    plot_distributions_1(
+    plot_distributions(
       mcSimulation_object = garden_simulation_results(), 
       vars = c("NPV_garden_public_school", 
                "NPV_garden_STEM_public_school"),
