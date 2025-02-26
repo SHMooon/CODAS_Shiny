@@ -1176,13 +1176,21 @@ ui <- fluidPage(
                       br(), # blank line
                       br(), # blank line
                       
-                      h5(strong("3. Cash flow")),
+                      h5(strong("3-1. Cash flow of public school garden")),
                       
                       plotOutput("distPlot3",height = "250px",
                                  width = "95%"),
                       
                       p('Biểu đồ trên minh họa dòng tiền mặt tính bằng triệu đồng/năm trong những năm mô phỏng.'),
                       downloadButton("save_plot3", "Tải về đồ thị"), 
+                      
+                      h5(strong("3-2. Cash flow of public school STEM garden")),
+                      
+                      plotOutput("distPlot4",height = "250px",
+                                 width = "95%"),
+                      
+                      p('Biểu đồ trên minh họa dòng tiền mặt tính bằng triệu đồng/năm trong những năm mô phỏng.'),
+                      downloadButton("save_plot4", "Tải về đồ thị"), 
                       
                     )# close wellPanel       
              ) # close the right side column
@@ -2015,95 +2023,7 @@ server <- function(input, output, session) {
 
   plot2 <- reactive({
     
-    # Extract the dataframe from mcSimulation object
-    garden_data <- garden_simulation_results()$y  
-    
-    
-    # Process Data
-    garden_data_1 <- garden_data %>% 
-      dplyr::mutate(group = ifelse(NPV_garden_public_school < 0 & NPV_garden_STEM_public_school < 0, "No", "Yes")) %>%
-      dplyr::group_by(group) %>%
-      dplyr::summarise(
-        NPV_total_garden = sum(abs(NPV_garden_public_school)),  # Absolute values to avoid negatives
-        NPV_total_garden_STEM_public_school = sum(abs(NPV_garden_STEM_public_school))) %>%
-      dplyr::mutate(
-        prop_garden = NPV_total_garden / sum(NPV_total_garden) * 100,
-        prop_STEM_garden = NPV_total_garden_STEM_public_school / sum(NPV_total_garden_STEM_public_school) * 100 ) %>%
-      dplyr::mutate(ypos_garden = cumsum(prop_garden) - 0.5 * prop_garden,
-             ypos_STEM_garden = cumsum(prop_STEM_garden) - 0.5 * prop_STEM_garden)
-    
-
-    # Plot
-    ggplot2::ggplot(garden_data_1) +
-      # Garden Bar
-      ggplot2::geom_bar(aes(x = factor(1), y = prop_garden, fill = group), 
-                        stat = "identity", width = 0.5, color = "white", alpha = 0.3, 
-                        position = position_stack(reverse = TRUE)) +  
-      # STEM Garden Bar
-      ggplot2::geom_bar(aes(x = factor(2), y = prop_STEM_garden, fill = group), 
-                        stat = "identity", width = 0.5, color = "white", alpha = 0.3, 
-                        position = position_stack(reverse = TRUE)) +  
-      # Text Labels for Garden
-      ggplot2::geom_text(aes(x = factor(1), y = ypos_garden, 
-                             label = paste0(round(prop_garden, 1), "%")), 
-                         color = "black", size = 5, fontface = "bold") +
-      # Text Labels for STEM Garden
-      ggplot2::geom_text(aes(x = factor(2), y = ypos_STEM_garden, 
-                             label = paste0(round(prop_STEM_garden, 1), "%")), 
-                         color = "black", size = 5, fontface = "bold") +
-      # Custom Colors
-      ggplot2::scale_fill_manual(values = c("Yes" = "blue", "No" = "red")) +
-      # Flip for Horizontal Bars
-      ggplot2::coord_flip() +  
-      # Minimal Theme
-      ggplot2::theme_minimal() + 
-      # Adjust Styling
-      ggplot2::theme(
-        
-        axis.title.y = element_blank(),
-        axis.ticks.y = element_blank(),
-        axis.text.y = element_text(size = 12, face = "bold"),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.title.x = element_blank(),
-        legend.position = "bottom", 
-        legend.justification = "center",
-        legend.direction = "horizontal",  # Make the legend horizontal
-        legend.box.spacing = unit(0.5, "cm")
-      )+
-      scale_x_discrete(labels = c("2"="Garden", "1"="STEM \nGarden"))+
-      labs(fill = "Decision")
-    
-  })
-  
-  # Basic table output
-  output$garden_data_long <- renderTable({
-    garden_data_long <- garden_simulation_results()$y %>%
-      dplyr::mutate(NPV_garden_public_school_group = ifelse(NPV_garden_public_school < 0, "No", "Yes"),
-                    NPV_garden_STEM_public_school_group = ifelse(NPV_garden_STEM_public_school < 0, "No", "Yes")
-      ) %>%
-      tidyr::pivot_longer(
-        cols = c(NPV_garden_public_school_group, NPV_garden_STEM_public_school_group),
-        names_to = "name",
-        values_to = "group"
-      ) %>%
-      dplyr::mutate(name = dplyr::recode(name, 
-                                         "NPV_garden_public_school_group" = "public school \ngarden",
-                                         "NPV_garden_STEM_public_school_group" = "public school \nSTEM garden")
-      )%>%
-      dplyr::mutate(name = factor(name, levels = c("public school \ngarden", "public school \nSTEM garden"))) %>%
-      dplyr::group_by(name, group) %>%
-      dplyr::summarise(
-        count = n(),
-        percent = round(100 * n() / nrow(garden_simulation_results()$y), 1),
-        .groups = "drop"
-      )
-  })
-  
-  
-  plot3 <- reactive({
-    
-    
+   
     garden_data_long <- garden_simulation_results()$y %>%
       dplyr::mutate(NPV_garden_public_school_group = ifelse(NPV_garden_public_school < 0, "No", "Yes"),
                     NPV_garden_STEM_public_school_group = ifelse(NPV_garden_STEM_public_school < 0, "No", "Yes")
@@ -2149,7 +2069,53 @@ server <- function(input, output, session) {
         legend.box.spacing = unit(0.5, "cm")
       ) +
       ggplot2::labs(fill = "Decision")
+  })
+  
+  # Basic table output
+  output$garden_data_long <- renderTable({
+    garden_data_long <- garden_simulation_results()$y %>%
+      dplyr::mutate(NPV_garden_public_school_group = ifelse(NPV_garden_public_school < 0, "No", "Yes"),
+                    NPV_garden_STEM_public_school_group = ifelse(NPV_garden_STEM_public_school < 0, "No", "Yes")
+      ) %>%
+      tidyr::pivot_longer(
+        cols = c(NPV_garden_public_school_group, NPV_garden_STEM_public_school_group),
+        names_to = "name",
+        values_to = "group"
+      ) %>%
+      dplyr::mutate(name = dplyr::recode(name, 
+                                         "NPV_garden_public_school_group" = "public school \ngarden",
+                                         "NPV_garden_STEM_public_school_group" = "public school \nSTEM garden")
+      )%>%
+      dplyr::mutate(name = factor(name, levels = c("public school \ngarden", "public school \nSTEM garden"))) %>%
+      dplyr::group_by(name, group) %>%
+      dplyr::summarise(
+        count = n(),
+        percent = round(100 * n() / nrow(garden_simulation_results()$y), 1),
+        .groups = "drop"
+      )
+  })
+  
+  
+  plot3 <- reactive({
+    decisionSupport::plot_cashflow(mcSimulation_object = garden_simulation_results(), 
+                                   cashflow_var_name = "Cashflow_garden_public", 
+                                   facet_labels = "Public school garden") + 
+      theme(legend.position = "none", axis.title.x = element_blank(), 
+            axis.text.x = element_blank(),
+            axis.ticks = element_blank())  
+    
       
+  })
+  
+  plot4 <- reactive({
+    decisionSupport::plot_cashflow(mcSimulation_object = garden_simulation_results(), 
+                                   cashflow_var_name = "Cashflow_garden_STEM_public", 
+                                   facet_labels = "Public school STEM garden") + 
+      theme(legend.position = "none", axis.title.x = element_blank(), 
+            axis.text.x = element_blank(),
+            axis.ticks = element_blank())  
+    
+    
   })
   
   
@@ -2161,6 +2127,9 @@ server <- function(input, output, session) {
   })
   output$distPlot3 <- renderPlot({
     plot3()
+  })
+  output$distPlot4 <- renderPlot({
+    plot4()
   })
   
   ### Helper function to create download handlers
@@ -2180,6 +2149,7 @@ server <- function(input, output, session) {
   output$save_plot1 <- createDownloadHandler(plot1, "Plot_comparison_outcome")
   output$save_plot2 <- createDownloadHandler(plot2, "Plot_comparison_outcome")
   output$save_plot3 <- createDownloadHandler(plot3, "Plot_Cashflow")
+  output$save_plot4 <- createDownloadHandler(plot4, "Plot_Cashflow_STEM")
   
   
   # Display data frame 
