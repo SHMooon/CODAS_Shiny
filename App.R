@@ -127,7 +127,7 @@ ui <- fluidPage(
   tabPanel("2.Version", class= "tabPanel",
            
            fluidRow(
-           column(12, h5("School garden Version: 25.02.25"),
+           column(12, h5("School garden Version: 26.Feb.25"),
                   h5 ("Authors: Sanghyo Moon, Cory Whitney, & Luu Thi Thu Giang"),
                   align = "right"      )
            ),
