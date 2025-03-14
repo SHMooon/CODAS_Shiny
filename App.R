@@ -156,7 +156,7 @@ ui <- fluidPage(
              column(7, class = "content",
                     br(),
                     
-                    tags$div(id = "0_1", h4(strong('Giới thiệu về mô hình vườn trường'))),
+                    tags$div(id = "0_1", h4(strong(icon("lightbulb"),"Giới thiệu về mô hình vườn trường"))),
                     p("Mô hình hỗ trợ ra quyết định cho can thiệp dinh dưỡng bằng vườn trường tại khu vực đô thị Hà Nội được xây dựng nhằm mục đích giúp Ban Giám Hiệu 
                     của các trường học ở đưa ra quyết định có nên vận hành vườn trường trong khuôn viên trường học hay không và có tích hợp vườn trường này vào phương 
                     pháp giảng dạy STEM hay không. Theo đó, có 3 phương án đầu tư được đưa ra bao gồm: "),
@@ -173,14 +173,14 @@ ui <- fluidPage(
                     động của vườn trường dựa vào giá trị của các biến đầu vào được cung cấp bởi chuyên gia. Bạn có thể nhìn xem kết quả tác động của vườn trường ở phía bên phải."),
                     br(),
                     
-                    tags$div(h4(strong("Cung cấp số liệu đầu vào cho mô hình"))),
+                    tags$div(h4(strong(icon("circle-check"),"Cung cấp số liệu đầu vào cho mô hình"))),
                     p("Mô hình lý thuyết cho thấy tất cả các biến số liên quan và ảnh hưởng đến quyết định và mỗi biến số cần 
                       được đánh giá định lượng bằng cách đưa ra các khoảng giá trị hợp lý. 
                       Vui lòng cung cấp các khoảng giá trị mà anh chị chắc chắn 90% là giá trị chính xác sẽ nằm trong khoảng giá trị này, 
                       giống như khi bạn đưa ra khoảng giá trị khi tham gia tập huấn hiệu chỉnh trong dự án NIFAM."),
                     br(),
                     
-                    tags$div(h4(strong("Ai trả lời câu hỏi nào?"))),
+                    tags$div(h4(strong(icon("compass"),"Ai trả lời câu hỏi nào?"))),
                     p ("Mô hình có nhiều biến đầu vào thuộc 15 lĩnh vực khác nhau như trong mục lục. Sẽ rất khó để mỗi chuyên gia trả 
                          lời tất cả các câu hỏi liên quan. Do vậy, chuyên gia có thể trả lời một số câu hỏi khác nhau phù hợp với chuyên môn. 
                          Ví dụ, những câu hỏi chung về mô hình như diện tích vườn thì nên hỏi người ra quyết định, cố vấn của người ra quyết 
@@ -190,7 +190,7 @@ ui <- fluidPage(
                          vườn trường. Câu hỏi này yêu cầu người trả lời phải biết được diện tích vườn là bao nhiêu, vườn cung cấp những loại thực 
                          phẩm nào (rau, thịt). Do vậy, người trả lời cần biết thông tin tổng thể về khu vườn trước khi trả lời câu hỏi về tác động. "),
                     br(),
-                    tags$div(id = "0", h4(strong("Mục lục"))),
+                    tags$div(id = "0", h4(strong(icon("rectangle-list"),"Mục lục"))),
                   
                     tags$a(href = "#1", "1. Các thông số chung của mô hình", style = "display: block; margin-bottom: 5px;"),
                     tags$a(href = "#2", "2. Các thông số về khu vườn", style = "display: block; margin-bottom: 5px;"),
@@ -1169,7 +1169,7 @@ ui <- fluidPage(
                       br(), # blank line
                       br(), # blank line
                     
-                      h5(strong("2.“Nên làm” vs. “Không nên làm")),
+                      h5(strong("2.“Nên làm” vs. “Không nên làm",img(src = "Thinking_Emoji.png", height = "40px"))),
                       plotOutput("distPlot2",height = "250px",
                                  width = "95%"),
                       h5(strong('Figure 2. Kết quả xác suất của quyết định xét về NPV trong giai đoạn mô phỏng.')),
