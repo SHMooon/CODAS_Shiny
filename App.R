@@ -103,7 +103,7 @@ ui <- fluidPage(
         # Logos column
         fluidRow(column(width = 2,
                         align = "right",
-                        tags$a(#href = "https://agroreforest.eu/", # Add URL here
+                        tags$a(href = "https://www.gartenbauwissenschaften.uni-bonn.de/en/research/hollistic-modeling/nifam", # Add URL here
                           tags$img(src = "Logo/NIFAM.png", height = "90px"))),
                  column(width = 7,
                         align = "center",
@@ -1184,23 +1184,39 @@ ui <- fluidPage(
                       br(), # blank line
                       br(), # blank line
                       
-                      h5(strong("3-1. Cash flow of public school garden")),
+                      h5(strong("3-1. Dòng tiền của vườn trường công lập")),
                       
                       plotOutput("distPlot3",height = "250px",
                                  width = "95%"),
                       
-                      p('Biểu đồ trên minh họa dòng tiền mặt tính bằng triệu đồng/năm trong những năm mô phỏng.'),
+                      p('Biểu đồ minh họa dòng tiền dự kiến hàng năm (triệu VND) cho một vườn trường công lập trong các năm mô phỏng. 
+                        Các vùng màu thể hiện các khoảng phân vị khác nhau. Vùng màu xám nhạt biểu thị khoảng từ phân vị 5% đến 95%, 
+                        nghĩa là 90% dữ liệu nằm trong vùng này. Vùng màu xám đậm đại diện cho khoảng từ phân vị 25% đến 75%, 
+                        nghĩa là 50% kết quả mô phỏng nằm trong vùng này. Đường màu xanh thể hiện dòng tiền trung vị trong suốt 
+                        giai đoạn mô phỏng. Trung vị là giá trị mà 50% kết quả lớn hơn và 50% nhỏ hơn. '),
                       downloadButton("save_plot3", "Tải về đồ thị"), 
                       
-                      h5(strong("3-2. Cash flow of public school STEM garden")),
+                      h5(strong("3-2. Dòng tiền của vườn trường STEM công lập")),
                       
                       plotOutput("distPlot4",height = "250px",
                                  width = "100%"),
                       
-                      p('Biểu đồ trên minh họa dòng tiền mặt tính bằng triệu đồng/năm trong những năm mô phỏng.'),
+                      p('Biểu đồ minh họa dòng tiền dự kiến hàng năm (triệu VND) cho một vườn trường công lập trong các năm mô phỏng. 
+                        Các vùng màu thể hiện các khoảng phân vị khác nhau. Vùng màu xám nhạt biểu thị khoảng từ phân vị 5% đến 95%, 
+                        nghĩa là 90% dữ liệu nằm trong vùng này. Vùng màu xám đậm đại diện cho khoảng từ phân vị 25% đến 75%, 
+                        nghĩa là 50% kết quả mô phỏng nằm trong vùng này. Đường màu xanh thể hiện dòng tiền trung vị trong suốt 
+                        giai đoạn mô phỏng. Trung vị là giá trị mà 50% kết quả lớn hơn và 50% nhỏ hơn. '),
                       downloadButton("save_plot4", "Tải về đồ thị"), 
+                      br(), 
+                      br(),
                       
-                    )# close wellPanel       
+                      h5(strong("Do you still plan to do that?")),
+                      p("We want to have feedback from decision-makers on how the make the decisions differently?"),
+                      textAreaInput(width = "100%", 
+                                    height ='100px',
+                                    "Decision_Y_N_1","")
+                    
+                      )# close wellPanel       
              ) # close the right side column
            ), #close FluidRow
            
@@ -2093,18 +2109,20 @@ server <- function(input, output, session) {
     decisionSupport::plot_cashflow(mcSimulation_object = garden_simulation_results(), 
                                    cashflow_var_name = "Cashflow_garden_public", 
                                    facet_labels = "Public school garden",
-                                   y_axis_name = "Dòng tiền (million VND/year)",
+                                   y_axis_name = "Dòng tiền (triệu VND/Năm)",
                                    x_axis_name = "Dòng thời gian can thiệp",
-                                   legend_name = "tứ phân vị (%)",
+                                   legend_name = "Tứ phân vị (%)",
                                    legend_labels = c("5 to 95 %", "25 to 75 %", "median")) + 
       theme(legend.margin = margin(0.2,1,0.2,1),
-            #legend.title = element_blank(), # remove title = remove space between 25-75% and median
-            legend.position = c(0.17, 0.98),  # Legend in top-right corner
+            legend.title = element_text(face = "bold", size = 10),
+            legend.position = c(0.64, 0.98),  # Legend in top-right corner
             legend.justification = c(1, 1),
             legend.box.background = element_rect(fill = "white"),
             legend.spacing.y = unit(0, "pt"), # spacing between two legends
             legend.key.height = unit(0.6, "cm"),  # Reduces the height of legend keys
-            legend.text = element_text(size = 8)
+            legend.text = element_text(size = 8),
+            legend.box = "horizontal",
+            legend.direction = "horizontal"
             #legend.box.spacing= unit(0, "pt") # space between plot and legend
       )
       
@@ -2114,18 +2132,20 @@ server <- function(input, output, session) {
     decisionSupport::plot_cashflow(mcSimulation_object = garden_simulation_results(), 
                                    cashflow_var_name = "Cashflow_garden_STEM_public", 
                                    facet_labels = "Public school STEM garden",
-                                   y_axis_name = "Dòng tiền (million VND/year)",
+                                   y_axis_name = "Dòng tiền (triệu VND/Năm)",
                                    x_axis_name = "Dòng thời gian can thiệp",
-                                   legend_name = "tứ phân vị (%)",
+                                   legend_name = "Tứ phân vị (%)",
                                    legend_labels = c("5 to 95 %", "25 to 75 %", "median")) + 
       theme(legend.margin = margin(0.2,1,0.2,1),
-            #legend.title = element_blank(), # remove title = remove space between 25-75% and median
-            legend.position = c(0.17, 0.98),  # Legend in top-right corner
+            legend.title = element_text(face = "bold", size = 10),
+            legend.position = c(0.6, 0.98),  # Legend in top-right corner
             legend.justification = c(1, 1),
             legend.box.background = element_rect(fill = "white"),
             legend.spacing.y = unit(0, "pt"), # spacing between two legends
             legend.key.height = unit(0.6, "cm"),  # Reduces the height of legend keys
-            legend.text = element_text(size = 8)
+            legend.text = element_text(size = 8),
+            legend.box = "horizontal",
+            legend.direction = "horizontal"
             #legend.box.spacing= unit(0, "pt") # space between plot and legend
       )
   })
