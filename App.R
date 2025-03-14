@@ -2014,8 +2014,8 @@ server <- function(input, output, session) {
       tidyr::pivot_longer(cols = c("NPV_garden_public_school", "NPV_garden_STEM_public_school"),
                           names_to = "name", values_to = "value") %>%
       dplyr::mutate(name = dplyr::recode(name, 
-                                         "NPV_garden_public_school" = "public school garden",
-                                         "NPV_garden_STEM_public_school" = "public school STEM garden"))
+                                         "NPV_garden_public_school" = "Vườn trường công \nkhông có STEM",
+                                         "NPV_garden_STEM_public_school" = "Vườn trường công \nvới STEM"))
     
     colors <- c("#009999", "#0000FF", "#56B4E9", "#009E73", 
                 "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
@@ -2027,13 +2027,16 @@ server <- function(input, output, session) {
       ggplot2::scale_y_continuous(expand = ggplot2::expansion(mult = 0.01), labels = scales::comma) + 
       ggplot2::scale_fill_manual(values = colors) + 
       ggplot2::scale_color_manual(values = colors) + 
-      ggplot2::labs(x = "Kết quả NPV so sánh", y = "Mật độ xác suất", fill = "Decision option", color = "Decision option") + 
+      ggplot2::labs(x = "Kết quả NPV so sánh", y = "Mật độ xác suất", fill = "Tùy chọn quyết định", color = "Tùy chọn quyết định") + 
       ggplot2::theme_bw() +
       ggplot2::theme(
         legend.position = c(0.98, 0.98),  # Legend in top-right corner
         legend.justification = c(1, 1),
         axis.ticks.y = element_blank(),
-        axis.text.y = element_blank()
+        axis.text.y = element_blank(),
+        legend.key.spacing.y = unit(5, "pt"),
+        legend.title = element_text(face = "bold")
+        
       ) 
     })
 
@@ -2142,7 +2145,6 @@ server <- function(input, output, session) {
             legend.position = c(0.6, 0.98),  # Legend in top-right corner
             legend.justification = c(1, 1),
             legend.box.background = element_rect(fill = "white"),
-            legend.spacing.y = unit(0, "pt"), # spacing between two legends
             legend.key.height = unit(0.6, "cm"),  # Reduces the height of legend keys
             legend.text = element_text(size = 8),
             legend.box = "horizontal",
