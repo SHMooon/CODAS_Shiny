@@ -127,7 +127,7 @@ ui <- fluidPage(
   tabPanel("2.Version", class= "tabPanel",
            
            fluidRow(
-           column(12, h5("School garden Version: 26.Feb.25"),
+           column(12, h5("School garden Version: 14.Mar.25"),
                   h5 ("Authors: Sanghyo Moon, Cory Whitney, & Luu Thi Thu Giang"),
                   align = "right"      )
            ),
@@ -178,6 +178,18 @@ ui <- fluidPage(
                       được đánh giá định lượng bằng cách đưa ra các khoảng giá trị hợp lý. 
                       Vui lòng cung cấp các khoảng giá trị mà anh chị chắc chắn 90% là giá trị chính xác sẽ nằm trong khoảng giá trị này, 
                       giống như khi bạn đưa ra khoảng giá trị khi tham gia tập huấn hiệu chỉnh trong dự án NIFAM."),
+                    br(),
+                    
+                    tags$div(h4(strong("Ai trả lời câu hỏi nào?"))),
+                    p ("Mô hình có nhiều biến đầu vào thuộc 15 lĩnh vực khác nhau như trong mục lục. Sẽ rất khó để mỗi chuyên gia trả 
+                         lời tất cả các câu hỏi liên quan. Do vậy, chuyên gia có thể trả lời một số câu hỏi khác nhau phù hợp với chuyên môn. 
+                         Ví dụ, những câu hỏi chung về mô hình như diện tích vườn thì nên hỏi người ra quyết định, cố vấn của người ra quyết 
+                         định. Những câu hỏi về chi phí đầu tư xây dựng vườn thì nên được hỏi các bên cung cấp dịch vụ, các tổ chức có kinh 
+                         nghiệm xây dựng vườn trường (như CODAS). Ngoài ra, có một số câu hỏi sẽ cần thông tin đầu vào từ câu hỏi khác mới trả 
+                         lời được. Ví dụ như câu hỏi về tác động lên việc giảm chi phí của căng tin mua thực phẩm bên ngoài do có nguồn cung từ 
+                         vườn trường. Câu hỏi này yêu cầu người trả lời phải biết được diện tích vườn là bao nhiêu, vườn cung cấp những loại thực 
+                         phẩm nào (rau, thịt). Do vậy, người trả lời cần biết thông tin tổng thể về khu vườn trước khi trả lời câu hỏi về tác động. "),
+                    br(),
                     tags$div(id = "0", h4(strong("Mục lục"))),
                   
                     tags$a(href = "#1", "1. Các thông số chung của mô hình", style = "display: block; margin-bottom: 5px;"),
@@ -1145,32 +1157,28 @@ ui <- fluidPage(
                       plotOutput("distPlot1",height = "250px",
                                  width = "95%"),
                       p(strong("Fig.1 Phân bố kết quả xác suất từ mô phỏng Monte Carlo cho đường cơ sở và can thiệp.")),
-                      p ("Biểu đồ trên cung cấp so sánh trực quan về phân phối kết quả
-                          đối với các tùy chọn đường cơ sở và can thiệp về giá trị hiện tại ròng
-                          (NPV tính bằng  €/ha) trong khoảng thời gian mô phỏng. Trục x đại diện cho NPV,
-                          được tính bằng tổng dòng tiền chiết khấu cho mỗi năm mô phỏng.
-                          Trục tung cho thấy xác suất xảy ra, chỉ ra khả năng xảy ra
-                          của các giá trị NPV khác nhau. Giá trị cao hơn trên trục y tương ứng với một
-                         xác suất lớn hơn của NPV liên quan trên trục x."),
+                      p ("Biểu đồ trên cung cấp so sánh trực quan về kết quả đầu tư tính bằng giá trị hiện tại ròng (NPV) tính bằng triệu 
+                         đồng trong khoảng thời gian mô phỏng khi so sánh giải pháp can thiệp, tức là có thiết lập vườn trường so với không 
+                         có vườn trường. Trục x là giá trị lợi nhuận tại ròng của vườn trường cho toàn bộ số năm mô phỏng, đã được chiết khấu 
+                         về giá trị hiện tại. Trục y là mật độ xác suất xảy ra tức là mức độ tập trung của các giá trị NPV. Các vùng có mật độ 
+                         cao hơn (đường cong cao hơn) thì Giá trị NPV ở đó xuất hiện nhiều hơn, có xác suất cao hơn. Các vùng có mật độ thấp hơn 
+                         (đường cong thấp hơn) thì giá trị NPV ít xuất hiện hơn. Diện tích dưới đường cong, tức là tổng xác suất của tất cả các giá 
+                         trị NPV có thể xảy ra luôn bằng 1."),
                       downloadButton("save_plot1", "Tải về đồ thị"),
                       
                       br(), # blank line
                       br(), # blank line
                     
-                      h5(strong("2.Giá trị hiện tại ròng (NPV)")),
+                      h5(strong("2.“Nên làm” vs. “Không nên làm")),
                       plotOutput("distPlot2",height = "250px",
                                  width = "95%"),
                       h5(strong('Figure 2. Kết quả xác suất của quyết định xét về NPV trong giai đoạn mô phỏng.')),
-                      p("Figure for students. an explanation for students will be updated"),
-                      # p('Biểu đồ trên minh họa kết quả dưới dạng NPV tính bằng  € / ha trở lên 
-                      #   những năm được mô phỏng, so sánh kịch bản cơ bản với sự can thiệp. 
-                      #   Nó nêu bật sự khác biệt về dòng tiền thuần giữa hai phương án. 
-                      #   Độ lệch phải của biểu đồ cho thấy rằng sự can thiệp nói chung là 
-                      #   thuận lợi Tuy nhiên, kể từ khi phân phối bao gồm cả tích cực và 
-                      #   giá trị âm, vẫn còn một xác suất không bằng 0 rằng sự can thiệp 
-                      #   có thể không phải lúc nào cũng mang lại kết quả thuận lợi hơn đường cơ sở. Là... 
-                      #   đồ thị hộp tích hợp cho thấy rằng trong khi phạm vi liên quý (IQR) phần lớn là tích cực, 
-                      #   nó bao gồm một số giá trị âm. Đường thẳng đứng trong biểu đồ hộp đại diện cho NPV trung bình.'),
+                      p("Biểu đồ cột minh họa phân bố các kết quả của Giá trị Hiện tại Ròng (NPV), tính bằng triệu đồng, 
+                        trong hai kịch bản là kịch bản cơ sở và kịch bản can thiệp, trong suốt giai đoạn mô phỏng. Kịch bản 
+                        can thiệp gồm lựa chọn thiết lập vườn trường có và không có tích hợp với STEM tại một trường công lập. 
+                        Quyết định được thể hiện trực quan: các cột màu xanh bên phải biểu thị các trường hợp NPV dương (hỗ trợ quyết định 'Nên làm'), 
+                        trong khi các cột bên trái biểu thị NPV âm (gợi ý 'Không nên làm')."),
+                      
                       downloadButton("save_plot2", "Tải về đồ thị"),
                       
                       br(), # blank line
@@ -1187,7 +1195,7 @@ ui <- fluidPage(
                       h5(strong("3-2. Cash flow of public school STEM garden")),
                       
                       plotOutput("distPlot4",height = "250px",
-                                 width = "95%"),
+                                 width = "100%"),
                       
                       p('Biểu đồ trên minh họa dòng tiền mặt tính bằng triệu đồng/năm trong những năm mô phỏng.'),
                       downloadButton("save_plot4", "Tải về đồ thị"), 
@@ -1965,9 +1973,7 @@ server <- function(input, output, session) {
   }
   
   # simulation ####    
-  
-  
-  garden_simulation_results <- reactive({
+ garden_simulation_results <- reactive({
 
     mcSimulation(
       estimate = as.estimate(input_estimates()),  # Pass the modified object
@@ -1976,22 +1982,15 @@ server <- function(input, output, session) {
       functionSyntax = "plainNames"
     )
   })
- 
-  
-  
-  # Basic table output
+ # Basic table output
   output$output_table_x <- renderTable({
     garden_simulation_results()$x
   })
-   
-  
-  # Basic table output
+ # Basic table output
   output$output_table_y <- renderTable({
     garden_simulation_results()$y
   })
-  
-
-  output$distPlot1 <- renderPlot({
+ output$distPlot1 <- renderPlot({
     
     
     garden_data_long <- garden_simulation_results()$y %>%
@@ -2011,22 +2010,20 @@ server <- function(input, output, session) {
       ggplot2::scale_y_continuous(expand = ggplot2::expansion(mult = 0.01), labels = scales::comma) + 
       ggplot2::scale_fill_manual(values = colors) + 
       ggplot2::scale_color_manual(values = colors) + 
-      ggplot2::labs(x = "Comparative NPV outcomes", y = "Density", fill = "Decision option", color = "Decision option") + 
+      ggplot2::labs(x = "Kết quả NPV so sánh", y = "Mật độ xác suất", fill = "Decision option", color = "Decision option") + 
       ggplot2::theme_bw() +
       ggplot2::theme(
         legend.position = c(0.98, 0.98),  # Legend in top-right corner
-        legend.justification = c(1, 1)
+        legend.justification = c(1, 1),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank()
       ) 
-    
-    
-  })
+    })
 
   plot2 <- reactive({
-    
-   
     garden_data_long <- garden_simulation_results()$y %>%
-      dplyr::mutate(NPV_garden_public_school_group = ifelse(NPV_garden_public_school < 0, "No", "Yes"),
-                    NPV_garden_STEM_public_school_group = ifelse(NPV_garden_STEM_public_school < 0, "No", "Yes")
+      dplyr::mutate(NPV_garden_public_school_group = ifelse(NPV_garden_public_school < 0, "Không nên làm", "Nên làm"),
+                    NPV_garden_STEM_public_school_group = ifelse(NPV_garden_STEM_public_school < 0, "Không nên làm", "Nên làm")
       ) %>%
       tidyr::pivot_longer(
         cols = c(NPV_garden_public_school_group, NPV_garden_STEM_public_school_group),
@@ -2034,10 +2031,10 @@ server <- function(input, output, session) {
         values_to = "group"
       ) %>%
       dplyr::mutate(name = dplyr::recode(name, 
-                                         "NPV_garden_public_school_group" = "public school \ngarden",
-                                         "NPV_garden_STEM_public_school_group" = "public school \nSTEM garden")
+                                         "NPV_garden_public_school_group" = "vườn trường công \nkhông có STEM",
+                                         "NPV_garden_STEM_public_school_group" = "vườn trường công \nvới STEM")
       )%>%
-      dplyr::mutate(name = factor(name, levels = c("public school \ngarden", "public school \nSTEM garden"))) %>%
+      dplyr::mutate(name = factor(name, levels = c("vườn trường công \nkhông có STEM", "vườn trường công \nvới STEM"))) %>%
       dplyr::group_by(name, group) %>%
       dplyr::summarise(
         count = n(),
@@ -2052,23 +2049,19 @@ server <- function(input, output, session) {
       ggplot2::geom_text(aes(label = paste0(round(percent, 1), "%")), 
                          position = position_stack(vjust = 0.5,reverse = TRUE), 
                          size = 5, color = "black") +  # Add percentage labels
-      ggplot2::scale_fill_manual(values = c("Yes" = "blue", "No" = "red")) +
+      ggplot2::scale_fill_manual(values = c("Nên làm" = "blue", "Không nên làm" = "red")) +
     
       ggplot2::coord_flip() +  
       ggplot2::theme_minimal() + 
       ggplot2::theme(
-        axis.title.y = element_blank(),
-        axis.ticks.y = element_blank(),
-        axis.text.y = element_text(size = 12, face = "bold"),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),axis.ticks.y = element_blank(),axis.text.y = element_text(size = 12, face = "bold"),
+        axis.text.x = element_blank(),axis.ticks.x = element_blank(),axis.title.x = element_blank(),
         legend.position = "bottom", 
         legend.justification = "center",
         legend.direction = "horizontal",  # Make the legend horizontal
         legend.box.spacing = unit(0.5, "cm")
       ) +
-      ggplot2::labs(fill = "Decision")
+      ggplot2::labs(fill = "Phán quyết")
   })
   
   # Basic table output
@@ -2099,23 +2092,42 @@ server <- function(input, output, session) {
   plot3 <- reactive({
     decisionSupport::plot_cashflow(mcSimulation_object = garden_simulation_results(), 
                                    cashflow_var_name = "Cashflow_garden_public", 
-                                   facet_labels = "Public school garden") + 
-      theme(legend.position = "none", axis.title.x = element_blank(), 
-            axis.text.x = element_blank(),
-            axis.ticks = element_blank())  
-    
+                                   facet_labels = "Public school garden",
+                                   y_axis_name = "Cashflow (million VND/year)",
+                                   x_axis_name = "Timeline of intervention",
+                                   legend_name = "Quantiles (%)",
+                                   legend_labels = c("5 to 95 %", "25 to 75 %", "median")) + 
+      theme(legend.margin = margin(0.2,1,0.2,1),
+            #legend.title = element_blank(), # remove title = remove space between 25-75% and median
+            legend.position = c(0.15, 0.98),  # Legend in top-right corner
+            legend.justification = c(1, 1),
+            legend.box.background = element_rect(fill = "white"),
+            legend.spacing.y = unit(0, "pt"), # spacing between two legends
+            legend.key.height = unit(0.6, "cm"),  # Reduces the height of legend keys
+            legend.text = element_text(size = 8)
+            #legend.box.spacing= unit(0, "pt") # space between plot and legend
+      )
       
   })
   
   plot4 <- reactive({
     decisionSupport::plot_cashflow(mcSimulation_object = garden_simulation_results(), 
                                    cashflow_var_name = "Cashflow_garden_STEM_public", 
-                                   facet_labels = "Public school STEM garden") + 
-      theme(legend.position = "none", axis.title.x = element_blank(), 
-            axis.text.x = element_blank(),
-            axis.ticks = element_blank())  
-    
-    
+                                   facet_labels = "Public school STEM garden",
+                                   y_axis_name = "Cashflow (million VND/year)",
+                                   x_axis_name = "Timeline of intervention",
+                                   legend_name = "Quantiles (%)",
+                                   legend_labels = c("5 to 95 %", "25 to 75 %", "median")) + 
+      theme(legend.margin = margin(0.2,1,0.2,1),
+            #legend.title = element_blank(), # remove title = remove space between 25-75% and median
+            legend.position = c(0.15, 0.98),  # Legend in top-right corner
+            legend.justification = c(1, 1),
+            legend.box.background = element_rect(fill = "white"),
+            legend.spacing.y = unit(0, "pt"), # spacing between two legends
+            legend.key.height = unit(0.6, "cm"),  # Reduces the height of legend keys
+            legend.text = element_text(size = 8)
+            #legend.box.spacing= unit(0, "pt") # space between plot and legend
+      )
   })
   
   
