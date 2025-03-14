@@ -1169,7 +1169,7 @@ ui <- fluidPage(
                       br(), # blank line
                       br(), # blank line
                     
-                      h5(strong('2.“Nên làm” vs. “Không nên làm"',img(src = "Thinking_Emoji.png", height = "40px"))),
+                      h5(strong('2.“Nên làm” vs. “Không nên làm"')),
                       plotOutput("distPlot2",height = "250px",
                                  width = "95%"),
                       h5(strong('Figure 2. Kết quả xác suất của quyết định xét về NPV trong giai đoạn mô phỏng.')),
@@ -1210,7 +1210,7 @@ ui <- fluidPage(
                       br(), 
                       br(),
                       
-                      h5(strong("Do you still plan to do that?")),
+                      h5(strong("Do you still plan to do that?",img(src = "Thinking_Emoji.png", height = "40px"))),
                       p("We want to have feedback from decision-makers on how the make the decisions differently?"),
                       textAreaInput(width = "100%", 
                                     height ='100px',
