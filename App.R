@@ -2093,13 +2093,13 @@ server <- function(input, output, session) {
     decisionSupport::plot_cashflow(mcSimulation_object = garden_simulation_results(), 
                                    cashflow_var_name = "Cashflow_garden_public", 
                                    facet_labels = "Public school garden",
-                                   y_axis_name = "Cashflow (million VND/year)",
-                                   x_axis_name = "Timeline of intervention",
-                                   legend_name = "Quantiles (%)",
+                                   y_axis_name = "Dòng tiền (million VND/year)",
+                                   x_axis_name = "Dòng thời gian can thiệp",
+                                   legend_name = "tứ phân vị (%)",
                                    legend_labels = c("5 to 95 %", "25 to 75 %", "median")) + 
       theme(legend.margin = margin(0.2,1,0.2,1),
             #legend.title = element_blank(), # remove title = remove space between 25-75% and median
-            legend.position = c(0.15, 0.98),  # Legend in top-right corner
+            legend.position = c(0.17, 0.98),  # Legend in top-right corner
             legend.justification = c(1, 1),
             legend.box.background = element_rect(fill = "white"),
             legend.spacing.y = unit(0, "pt"), # spacing between two legends
@@ -2114,13 +2114,13 @@ server <- function(input, output, session) {
     decisionSupport::plot_cashflow(mcSimulation_object = garden_simulation_results(), 
                                    cashflow_var_name = "Cashflow_garden_STEM_public", 
                                    facet_labels = "Public school STEM garden",
-                                   y_axis_name = "Cashflow (million VND/year)",
-                                   x_axis_name = "Timeline of intervention",
-                                   legend_name = "Quantiles (%)",
+                                   y_axis_name = "Dòng tiền (million VND/year)",
+                                   x_axis_name = "Dòng thời gian can thiệp",
+                                   legend_name = "tứ phân vị (%)",
                                    legend_labels = c("5 to 95 %", "25 to 75 %", "median")) + 
       theme(legend.margin = margin(0.2,1,0.2,1),
             #legend.title = element_blank(), # remove title = remove space between 25-75% and median
-            legend.position = c(0.15, 0.98),  # Legend in top-right corner
+            legend.position = c(0.17, 0.98),  # Legend in top-right corner
             legend.justification = c(1, 1),
             legend.box.background = element_rect(fill = "white"),
             legend.spacing.y = unit(0, "pt"), # spacing between two legends
