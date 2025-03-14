@@ -1210,8 +1210,9 @@ ui <- fluidPage(
                       br(), 
                       br(),
                       
-                      h5(strong("Do you still plan to do that?",img(src = "Thinking_Emoji.png", height = "40px"))),
-                      p("We want to have feedback from decision-makers on how the make the decisions differently?"),
+                      h5(strong("Quyết định của anh/chị?",img(src = "Thinking_Emoji.png", height = "40px"))),
+                      p("Nếu anh/chị là người ra quyết định đầu tư, anh/chị nghĩ mình có thể dựa vào kết quả phân tích 
+                        ở trên để đưa ra quyết định không? Nếu không, anh/chị sẽ quyết định như thế nào? Tại sao?"),
                       textAreaInput(width = "100%", 
                                     height ='100px',
                                     "Decision_Y_N_1","")
